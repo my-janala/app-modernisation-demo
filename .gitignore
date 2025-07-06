@@ -1,0 +1,64 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.env
+.venv
+venv/
+env/
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# Go
+bin/
+pkg/
+*.exe
+*.test
+*.out
+*.mod
+*.sum
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+out/
+*.log
+
+# Maven
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# SQL
+*.db
+*.sqlite
+
+# Others
+node_modules/

@@ -66,15 +66,98 @@ kubectl get svc -n konveyor-tackle
 * Access the UI
 Set up port forwarding to access Konveyor UI
 
-Terminal Commands
-
-Copy
+```
 kubectl port-forward svc/tackle-ui 8080:8080 -n konveyor-tackle
 # Access the UI at http://localhost:8080
-Important Notes
-•
-Ensure you have at least 8GB RAM and 40GB disk space available
-•
-The installation process may take 10-15 minutes depending on your internet connection
-•
-Keep the port-forward command running to access the UI
+```
+
+
+### Important Notes
+
+* Ensure you have at least 8GB RAM and 40GB disk space available
+* The installation process may take 10-15 minutes depending on your internet connection
+* Keep the port-forward command running to access the UI
+
+# Spring PetClinic Modernisation 
+
+### Deploy PetClinic with Konveyor Tackle
+
+* Step 1: Prepare Source Code
+
+```angular2html
+# Clone the Spring PetClinic repository
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+
+# Build the application to ensure it works
+./mvnw clean package -DskipTests
+
+# Create a ZIP file for upload to Konveyor
+zip -r petclinic-source.zip . -x '*.git*' 'target/*'
+```
+
+* Step 2: Upload to Konveyor
+
+```angular2html
+# Access Konveyor UI (ensure port-forward is running)
+kubectl port-forward svc/tackle-ui 8080:8080 -n konveyor-tackle
+
+# Open browser to http://localhost:8080
+# Navigate to Applications -> Create Application
+# Upload petclinic-source.zip
+```
+
+* Step 3: Run Analysis
+
+```
+# In Konveyor UI:
+# 1. Go to Analysis -> Create Analysis
+# 2. Select 'Spring PetClinic' application
+# 3. Choose target: 'Containerization' and 'Kubernetes'
+# 4. Select rules: 'Spring Boot to Quarkus' (optional)
+# 5. Click 'Run Analysis'
+
+# Monitor analysis progress
+kubectl logs -l app=tackle-analyzer -n konveyor-tackle -f
+```
+
+* Build Container Image
+
+The [Dockerfile](./Dockerfile) is here 
+
+* Deploy to Kubernetes
+
+```angular2html
+# Deploy to Kubernetes
+kubectl apply -f petclinic-deployment.yaml
+
+# Check deployment status
+kubectl get pods -l app=petclinic
+kubectl get svc petclinic-service
+```
+
+Access the application
+
+```
+# Get the service URL
+minikube service petclinic-service --url
+
+# Or use port forwarding
+kubectl port-forward svc/petclinic-service 8080:8080
+
+# Access the application
+# Open browser to the provided URL or http://localhost:8080
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
