@@ -12,9 +12,16 @@ Follow these steps to set up Konveyor on minikube for application modernization.
 
 ```angular2html
 # Install Docker (if not already installed)
+```
+
+
+```
 # Install minikube
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+```
 # Install kubectl
 curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
@@ -24,7 +31,20 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 Initialize minikube cluster with sufficient resources
 
 ```
-minikube start --cpus=4 --memory=8192 --disk-size=40g
+minikube start --cpus=4 --memory=8192 --disk-size=40g -p konveyor-demo
+```
+
+```aiignore
+minikube profile list 
+|---------------|-----------|---------|--------------|------|---------|--------|-------|----------------|--------------------|
+|    Profile    | VM Driver | Runtime |      IP      | Port | Version | Status | Nodes | Active Profile | Active Kubecontext |
+|---------------|-----------|---------|--------------|------|---------|--------|-------|----------------|--------------------|
+| konveyor-demo | docker    | docker  | 192.168.49.2 | 8443 | v1.33.1 | OK     |     1 |                | *                  |
+|---------------|-----------|---------|--------------|------|---------|--------|-------|----------------|--------------------|
+
+```
+
+```
 minikube addons enable ingress
 kubectl get nodes
 ```
