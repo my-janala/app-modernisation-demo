@@ -1,173 +1,339 @@
 # app-modernisation-demo
-app-modernisation-demo
 
-### Konveyor Installation Guide
+This project demonstrates application modernization using [Konveyor](https://konveyor.io/) on a local Kubernetes cluster with [minikube](https://minikube.sigs.k8s.io/).  
+It includes step-by-step instructions for setting up Konveyor and modernizing Java applications, including the Spring PetClinic and a sample legacy Java application.
 
-Follow these steps to set up Konveyor on minikube for application modernization.
+> **References followed:**  
+> - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)  
+> - [Kube by Example: Install Konveyor and Analyze Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application)  
+> - [Konveyor Operator Installation (macOS)](https://github.com/konveyor/operator/blob/main/docs/installation-macos.md)
 
+---
 
-#### Prerequisites Setup
+## Konveyor Installation Guide
 
-- Install Docker, minikube, and kubectl
+_Follow these steps to set up Konveyor on minikube for application modernization._
 
-```angular2html
-# Install Docker (if not already installed)
-```
+### Prerequisites
 
+- **Docker**: For building and running containers  
+  [Install Docker for Mac](https://docs.docker.com/desktop/install/mac/)
+- **minikube**: For running a local Kubernetes cluster  
+  [Install minikube](https://minikube.sigs.k8s.io/docs/start/)
+- **kubectl**: For interacting with Kubernetes  
+  [Install kubectl](https://kubernetes.io/docs/tasks/tools/)
 
-```
+#### Quick Install Commands (for Apple Silicon)
+
+```bash
 # Install minikube
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
-```
+sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 
-```
 # Install kubectl
-curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
 ```
+> **Note:** Adjust the download URLs if you are using Intel-based Macs or Linux.
 
-- Start Minikube
-Initialize minikube cluster with sufficient resources
+---
 
-```
+### Start Minikube
+
+Initialize a minikube cluster with sufficient resources:
+
+```bash
 minikube start --cpus=4 --memory=8192 --disk-size=40g -p konveyor-demo
-```
-
-```aiignore
-minikube profile list 
-|---------------|-----------|---------|--------------|------|---------|--------|-------|----------------|--------------------|
-|    Profile    | VM Driver | Runtime |      IP      | Port | Version | Status | Nodes | Active Profile | Active Kubecontext |
-|---------------|-----------|---------|--------------|------|---------|--------|-------|----------------|--------------------|
-| konveyor-demo | docker    | docker  | 192.168.49.2 | 8443 | v1.33.1 | OK     |     1 |                | *                  |
-|---------------|-----------|---------|--------------|------|---------|--------|-------|----------------|--------------------|
-
-```
-
-```
 minikube addons enable ingress
-kubectl get nodes
+minikube addons enable olm
 ```
 
-- Install Konveyor Operator
-
-```
-kubectl create namespace konveyor-tackle
-kubectl apply -f https://raw.githubusercontent.com/konveyor/tackle2-operator/main/tackle-k8s.yaml
-kubectl get pods -n konveyor-tackle
+If the OLM addon is not available or fails, install OLM manually:
+```bash
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
 ```
 
-* Deploy Tackle CR
-Create and apply the Tackle Custom Resource
+---
 
+### Install Konveyor Operator
 
+```bash
+kubectl create -f https://operatorhub.io/install/konveyor-operator.yaml
 ```
+
+---
+
+### Verify Operator Installation
+
+```bash
+# Check that the operator pod is running
+kubectl get pods -n my-konveyor-operator
+
+# Check that the Tackle CRD is installed
+kubectl get crds | grep tackle
+```
+You should see a pod like `tackle-operator-xxxx` in the `Running` state and a CRD named `tackles.tackle.konveyor.io`.
+
+---
+
+### Deploy Tackle Custom Resource
+
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: tackle.konveyor.io/v1alpha1
 kind: Tackle
 metadata:
   name: tackle
-  namespace: konveyor-tackle
+  namespace: my-konveyor-operator
 spec:
   feature_auth_required: false
 EOF
 ```
 
-* Verify Installation
-Check that all components are running
+---
 
+### Verify Tackle Deployment
+
+```bash
+# Check that the Tackle custom resource exists
+kubectl get tackle -n my-konveyor-operator
+
+# Check that all pods are running
+kubectl get pods -n my-konveyor-operator
+
+# Check that the required services are available
+kubectl get svc -n my-konveyor-operator
 ```
-kubectl get tackle -n konveyor-tackle
-kubectl get pods -n konveyor-tackle
-kubectl get svc -n konveyor-tackle
+You should see:
+- A `tackle` resource listed.
+- All pods (`tackle-operator`, `tackle-ui`, `tackle-hub`, etc.) in the `Running` state.
+- Services `tackle-ui` and `tackle-hub` available.
+
+---
+
+### Access the Konveyor UI
+
+Set up port forwarding to access the UI:
+
+```bash
+kubectl port-forward svc/tackle-ui 8080:8080 -n my-konveyor-operator
 ```
+Open your browser and navigate to [http://localhost:8080](http://localhost:8080).
 
-
-* Access the UI
-Set up port forwarding to access Konveyor UI
-
-```
-kubectl port-forward svc/tackle-ui 8080:8080 -n konveyor-tackle
-# Access the UI at http://localhost:8080
-```
-
+---
 
 ### Important Notes
 
-* Ensure you have at least 8GB RAM and 40GB disk space available
-* The installation process may take 10-15 minutes depending on your internet connection
-* Keep the port-forward command running to access the UI
+- Ensure you have at least **8GB RAM** and **40GB disk space** available.
+- The installation process may take **10-15 minutes** depending on your internet connection.
+- Keep the port-forward command running to access the UI.
 
-# Spring PetClinic Modernisation 
+---
 
-### Deploy PetClinic with Konveyor Tackle
+## Cleanup
 
-* Step 1: Prepare Source Code
+If you want to remove all Konveyor resources and your minikube cluster to free up system resources or start fresh, follow these steps:
 
-```angular2html
-# Clone the Spring PetClinic repository
-git clone https://github.com/spring-projects/spring-petclinic.git
-cd spring-petclinic
+```bash
+# 1. Delete the Tackle custom resource (optional)
+kubectl delete tackle tackle -n my-konveyor-operator
 
-# Build the application to ensure it works
-./mvnw clean package -DskipTests
+# 2. Delete the Konveyor operator and its namespace
+kubectl delete namespace my-konveyor-operator
 
-# Create a ZIP file for upload to Konveyor
-zip -r petclinic-source.zip . -x '*.git*' 'target/*'
+# 3. (If you created a separate konveyor-tackle namespace, delete it as well)
+kubectl delete namespace konveyor-tackle
+
+# 4. Delete the OLM (Operator Lifecycle Manager) components (optional)
+kubectl delete -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
+
+# 5. Delete the entire minikube cluster (this removes all workloads and data)
+minikube delete -p konveyor-demo
+
+# 6. (Optional) Delete all minikube clusters on your system
+minikube delete --all
 ```
+> **Note:** Deleting the minikube cluster will remove all applications, namespaces, and persistent data associated with that cluster.
 
-* Step 2: Upload to Konveyor
+---
 
-```angular2html
-# Access Konveyor UI (ensure port-forward is running)
-kubectl port-forward svc/tackle-ui 8080:8080 -n konveyor-tackle
+# Analyzing a Legacy Java Application with Konveyor
 
-# Open browser to http://localhost:8080
-# Navigate to Applications -> Create Application
-# Upload petclinic-source.zip
+This section demonstrates how to analyze a legacy Java application using Konveyor, following the ["Let's Get Started with Analysis Module"](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application) guideline.  
+_Note: In the latest Konveyor UI, analysis results may appear under the **Issues** tab rather than a dedicated Reports section._
+
+## Step 1: Create an Application Entry in Konveyor
+
+1. In the Konveyor UI, go to the **Analysis** tab and click **Create Application**.
+2. Fill in the application details:
+    - **Name:** `customer-tomcat`
+3. Expand the **Source Code** section and enter the following:
+    - **Repository Type:** `Git`
+    - **Source Repository:** `https://github.com/konveyor/example-applications`
+    - **Branch:** `main`
+    - **Root path:** `/example-1/`
+4. Click the **Create** button.
+
+## Step 2: Run an Analysis
+
+1. In the Konveyor UI, select the `customer-tomcat` application you just created.
+2. Click **Analyze** (or **Create Analysis**).
+3. Choose relevant targets (e.g., **Containerization**, **Kubernetes**).
+4. (Optional) Select migration rules if applicable.
+5. Click **Run Analysis**.
+6. Monitor progress in the UI or with:
+    ```bash
+    kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+    ```
+
+## Step 3: Review Analysis Results
+
+- After the analysis completes, go to your application's **Issues** tab in the Konveyor UI (not the Reports section).
+- Review the list of issues and recommendations.
+
+### Example Issues and How to Address Them
+
+#### **1. File System - Java IO**
+
+**Issue:**  
+The application reads configuration from a file inside the container, e.g.:
+```java
+try (InputStream inputStream = new FileInputStream("/opt/config/persistence.properties")) {
+    properties.load(inputStream);
+}
 ```
+**Why it's a problem:**  
+- Container file systems are ephemeral; files may be lost on restart or redeploy.
+- Hardcoded file paths make configuration updates difficult and less portable.
 
-* Step 3: Run Analysis
+**How to modernize:**  
+How you address this depends on the function of the file in local storage:
 
+- **Logging:** Log to standard output and use a centralized log collector to analyze the logs.
+- **Caching:** Use a cache backing service (such as Redis or Memcached) instead of writing cache data to the local file system.
+- **Configuration:** Store configuration settings in environment variables or mount them into the container using Kubernetes ConfigMaps, so they can be updated without code changes.
+- **Data storage:** Use a database backing service for relational data or a persistent data storage system, rather than writing to local files.
+- **Temporary data storage:** Use the file system of a running container only for brief, single-transaction caches or temporary files that can be safely lost if the container restarts.
+- Use **environment variables** for configuration, or mount configuration files using **Kubernetes ConfigMaps**.
+
+**Example (ConfigMap as file):**
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  persistence.properties: |
+    key1=value1
+    key2=value2
+---
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: your-app
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: app-config
 ```
-# In Konveyor UI:
-# 1. Go to Analysis -> Create Analysis
-# 2. Select 'Spring PetClinic' application
-# 3. Choose target: 'Containerization' and 'Kubernetes'
-# 4. Select rules: 'Spring Boot to Quarkus' (optional)
-# 5. Click 'Run Analysis'
+Or, refactor your Java code to read from environment variables.
 
-# Monitor analysis progress
-kubectl logs -l app=tackle-analyzer -n konveyor-tackle -f
+---
+
+#### **2. Hardcoded IP Address**
+
+**Issue:**  
+The application uses a hardcoded IP address in its configuration, e.g.:
+```properties
+jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1
 ```
+**Why it's a problem:**  
+- Hardcoded IPs make the app less portable and harder to move between environments.
+- If the database IP changes, you must rebuild or manually edit your config.
 
-* Build Container Image
+**How to modernize:**  
+- Use **environment variables** or **Kubernetes ConfigMaps/Secrets** for connection info.
+- Reference your database by **Kubernetes Service DNS name** instead of an IP.
 
-The [Dockerfile](./Dockerfile) is here 
-
-* Deploy to Kubernetes
-
-```angular2html
-# Deploy to Kubernetes
-kubectl apply -f petclinic-deployment.yaml
-
-# Check deployment status
-kubectl get pods -l app=petclinic
-kubectl get svc petclinic-service
+**Example:**
+```properties
+jdbc.url=jdbc:oracle:thin:@oracle-db-service:1521/XEPDB1
 ```
+Where `oracle-db-service` is the name of your Kubernetes Service for the database.
 
-Access the application
+---
 
-```
-# Get the service URL
-minikube service petclinic-service --url
+## Summary Table
 
-# Or use port forwarding
-kubectl port-forward svc/petclinic-service 8080:8080
+| Issue                | Why It’s a Problem                | Best Practice                                   |
+|----------------------|-----------------------------------|-------------------------------------------------|
+| File system Java IO  | Ephemeral storage, hard to update | Use env vars or ConfigMaps for configuration    |
+| Hardcoded IP Address | Not portable, hard to maintain    | Use env vars/ConfigMaps, reference by DNS name  |
 
-# Access the application
-# Open browser to the provided URL or http://localhost:8080
-```
+---
+
+## Application Modernization Review Actions
+
+When reviewing applications with Konveyor, you may be presented with several modernization strategy options. These are commonly referred to as the "5 Rs" of application modernization:
+
+### **1. Rehost ("Lift and Shift")**
+Move the application as-is from its current environment (such as on-premises or a VM) to a new infrastructure, typically the cloud or Kubernetes, with minimal or no code changes.  
+**Use when:** You want a quick migration with minimal risk and effort, and the application is stable.
+
+### **2. Replatform ("Lift, Tinker, and Shift")**
+Move the application to a new platform, making minimal changes to leverage cloud or container features, but not altering the core architecture.  
+**Use when:** You want to take advantage of new platform features (like managed databases or container orchestration) with minimal code changes.
+
+### **3. Refactor ("Re-architect")**
+Make significant changes to the application’s code or architecture to improve maintainability, scalability, or performance, or to adopt cloud-native patterns.  
+**Use when:** The application needs modernization to meet new business requirements or resolve technical debt (e.g., breaking up a monolith into microservices).
+
+### **4. Repurchase ("Drop and Shop")**
+Replace the existing application with a new, often SaaS-based, solution that provides similar or improved functionality.  
+**Use when:** Maintaining or modernizing the current application is not cost-effective, and a commercial off-the-shelf (COTS) or SaaS solution meets business needs.
+
+### **5. Retire**
+Decommission the application because it is no longer needed or its functionality is duplicated elsewhere.  
+**Use when:** The application is obsolete, unused, or redundant, and retiring it reduces costs and complexity.
+
+---
+
+| Action      | Description                                                                 | When to Use                                      |
+|-------------|-----------------------------------------------------------------------------|--------------------------------------------------|
+| Rehost      | Move as-is to new infrastructure                                            | Quick migration, minimal changes                  |
+| Replatform  | Move with minimal changes to leverage new platform features                 | Gain platform benefits, minor tweaks              |
+| Refactor    | Redesign or rewrite to improve or modernize                                 | Address technical debt, adopt new architectures   |
+| Repurchase  | Replace with a new (often SaaS) solution                                    | COTS/SaaS meets needs better than custom code     |
+| Retire      | Decommission the application                                                | App is obsolete, unused, or redundant             |
+
+These actions help you choose the best modernization strategy for each application, balancing effort, risk, and business value.
+
+---
+
+## Troubleshooting
+
+- Ensure all pods in the `my-konveyor-operator` namespace are running.
+- If you encounter issues, check logs with:
+  ```bash
+  kubectl logs <pod-name> -n my-konveyor-operator
+  ```
+- For more help, see the [Konveyor documentation](https://konveyor.github.io/tackle2-operator/).
+
+---
+
+## References
+
+- [Konveyor Tackle2 Operator](https://github.com/konveyor/tackle2-operator)
+- [Spring PetClinic](https://github.com/spring-projects/spring-petclinic)
+- [Minikube Documentation](https://minikube.sigs.k8s.io/docs/)
+- [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)
+- [Kube by Example: Install Konveyor and Analyze Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application)
 
 
 
