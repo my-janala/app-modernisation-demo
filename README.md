@@ -291,8 +291,16 @@ try (InputStream inputStream = new FileInputStream("/opt/config/persistence.prop
 - Hardcoded file paths make configuration updates difficult and less portable.
 
 **How to modernize:**  
-- Use **environment variables** for configuration, or
-- Mount configuration files using **Kubernetes ConfigMaps**.
+
+**How to modernize:**  
+How you address this depends on the function of the file in local storage:
+
+- **Logging:** Log to standard output and use a centralized log collector to analyze the logs.
+- **Caching:** Use a cache backing service (such as Redis or Memcached) instead of writing cache data to the local file system.
+- **Configuration:** Store configuration settings in environment variables or mount them into the container using Kubernetes ConfigMaps, so they can be updated without code changes.
+- **Data storage:** Use a database backing service for relational data or a persistent data storage system, rather than writing to local files.
+- **Temporary data storage:** Use the file system of a running container only for brief, single-transaction caches or temporary files that can be safely lost if the
+
 
 **Example (ConfigMap as file):**
 ```yaml
