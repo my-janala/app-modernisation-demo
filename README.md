@@ -1,7 +1,7 @@
 # app-modernisation-demo
 
 This project demonstrates application modernization using [Konveyor](https://konveyor.io/) on a local Kubernetes cluster with [minikube](https://minikube.sigs.k8s.io/).  
-It includes step-by-step instructions for setting up Konveyor and modernizing the Spring PetClinic application.
+It includes step-by-step instructions for setting up Konveyor and modernizing Java applications, including the Spring PetClinic and a sample legacy Java application.
 
 > **References followed:**  
 > - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)  
@@ -12,7 +12,7 @@ It includes step-by-step instructions for setting up Konveyor and modernizing th
 
 ## Konveyor Installation Guide
 
-Follow these steps to set up Konveyor on minikube for application modernization.
+_Follow these steps to set up Konveyor on minikube for application modernization._
 
 ### Prerequisites
 
@@ -227,6 +227,132 @@ kubectl port-forward svc/petclinic-service 8080:8080
 
 # Then open http://localhost:8080 in your browser
 ```
+
+---
+
+## Troubleshooting
+
+- Ensure all pods in the `my-konveyor-operator` namespace are running.
+- If you encounter issues, check logs with:
+  ```bash
+  kubectl logs <pod-name> -n my-konveyor-operator
+  ```
+- For more help, see the [Konveyor documentation](https://konveyor.github.io/tackle2-operator/).
+
+---
+
+# Analyzing a Legacy Java Application with Konveyor
+
+This section demonstrates how to analyze a legacy Java application using Konveyor, following the ["Let's Get Started with Analysis Module"](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application) guideline.  
+_Note: In the latest Konveyor UI, analysis results may appear under the **Issues** tab rather than a dedicated Reports section._
+
+## Step 1: Create an Application Entry in Konveyor
+
+1. In the Konveyor UI, go to the **Analysis** tab and click **Create Application**.
+2. Fill in the application details:
+    - **Name:** `customer-tomcat`
+3. Expand the **Source Code** section and enter the following:
+    - **Repository Type:** `Git`
+    - **Source Repository:** `https://github.com/konveyor/example-applications`
+    - **Branch:** `main`
+    - **Root path:** `/example-1/`
+4. Click the **Create** button.
+
+## Step 2: Run an Analysis
+
+1. In the Konveyor UI, select the `customer-tomcat` application you just created.
+2. Click **Analyze** (or **Create Analysis**).
+3. Choose relevant targets (e.g., **Containerization**, **Kubernetes**).
+4. (Optional) Select migration rules if applicable.
+5. Click **Run Analysis**.
+6. Monitor progress in the UI or with:
+    ```bash
+    kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+    ```
+
+## Step 3: Review Analysis Results
+
+- After the analysis completes, go to your application's **Issues** tab in the Konveyor UI (not the Reports section).
+- Review the list of issues and recommendations.
+
+### Example Issues and How to Address Them
+
+#### **1. File System - Java IO**
+
+**Issue:**  
+The application reads configuration from a file inside the container, e.g.:
+```java
+try (InputStream inputStream = new FileInputStream("/opt/config/persistence.properties")) {
+    properties.load(inputStream);
+}
+```
+**Why it's a problem:**  
+- Container file systems are ephemeral; files may be lost on restart or redeploy.
+- Hardcoded file paths make configuration updates difficult and less portable.
+
+**How to modernize:**  
+- Use **environment variables** for configuration, or
+- Mount configuration files using **Kubernetes ConfigMaps**.
+
+**Example (ConfigMap as file):**
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  persistence.properties: |
+    key1=value1
+    key2=value2
+---
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: your-app
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: app-config
+```
+Or, refactor your Java code to read from environment variables.
+
+---
+
+#### **2. Hardcoded IP Address**
+
+**Issue:**  
+The application uses a hardcoded IP address in its configuration, e.g.:
+```properties
+jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1
+```
+**Why it's a problem:**  
+- Hardcoded IPs make the app less portable and harder to move between environments.
+- If the database IP changes, you must rebuild or manually edit your config.
+
+**How to modernize:**  
+- Use **environment variables** or **Kubernetes ConfigMaps/Secrets** for connection info.
+- Reference your database by **Kubernetes Service DNS name** instead of an IP.
+
+**Example:**
+```properties
+jdbc.url=jdbc:oracle:thin:@oracle-db-service:1521/XEPDB1
+```
+Where `oracle-db-service` is the name of your Kubernetes Service for the database.
+
+---
+
+## Summary Table
+
+| Issue                | Why It’s a Problem                | Best Practice                                   |
+|----------------------|-----------------------------------|-------------------------------------------------|
+| File system Java IO  | Ephemeral storage, hard to update | Use env vars or ConfigMaps for configuration    |
+| Hardcoded IP Address | Not portable, hard to maintain    | Use env vars/ConfigMaps, reference by DNS name  |
 
 ---
 

@@ -42,23 +42,82 @@ out/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 
-# IDEs
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# IDEs and Editors
 .idea/
 *.iml
 *.ipr
 *.iws
 .vscode/
+*.swp
+*.swo
 
 # OS files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
 
 # Logs
 *.log
+logs/
+*.log.*
+nohup.out
 
-# SQL
+# SQL and DB
 *.db
 *.sqlite
+*.sql
+
+# Archives and compressed files
+*.zip
+*.tar.gz
+*.tgz
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Misc
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Test output
+test-output/
+coverage/
+coverage-final.json
+.nyc_output/
+
+# Docker
+*.pid
+*.seed
+docker-compose.override.yml
+
+# Kubernetes
+*.kube/
+*.minikube/
+
+# VS Code settings
+.vscode/
+.history/
+
+# Mac system files
+.AppleDouble
+.LSOverride
 
 # Others
-node_modules/
+*.pem
+*.key
+*.crt
+*.csr
+*.sublime
