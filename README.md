@@ -38,52 +38,61 @@ sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
 Initialize a minikube cluster with sufficient resources:
 
 ```bash
+# 1. Start minikube with enough resources
 minikube start --cpus=4 --memory=8192 --disk-size=40g -p konveyor-demo
+
+# 2. Enable ingress and OLM addons (OLM is optional if you install it manually)
 minikube addons enable ingress
-kubectl get nodes
-```
+minikube addons enable olm
 
-Check your minikube profile:
+# 3. (If OLM addon is not available or fails, install OLM manually)
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
 
-```bash
-minikube profile list
-```
+# 4. Install the Konveyor operator from OperatorHub
+kubectl create -f https://operatorhub.io/install/konveyor-operator.yaml
 
----
+# 5. Wait for the operator pod to be running
+kubectl get pods -n my-konveyor-operator
 
-### Install Konveyor Operator
-
-```bash
-kubectl create namespace konveyor-tackle
-kubectl apply -f https://raw.githubusercontent.com/konveyor/tackle2-operator/main/tackle-k8s.yaml
-kubectl get pods -n konveyor-tackle
-```
-
----
-
-### Deploy Tackle Custom Resource
-
-```bash
+# 6. Create the Tackle custom resource
 cat <<EOF | kubectl apply -f -
 apiVersion: tackle.konveyor.io/v1alpha1
 kind: Tackle
 metadata:
   name: tackle
-  namespace: konveyor-tackle
+  namespace: my-konveyor-operator
 spec:
   feature_auth_required: false
 EOF
+
+# 7. Wait for all Tackle pods to be running
+kubectl get pods -n my-konveyor-operator
+
+# 8. Port-forward the UI and access it in your browser
+kubectl port-forward service/tackle-ui 8080:8080 -n my-konveyor-operator
+# Then open http://localhost:8080
 ```
 
 ---
 
 ### Verify Installation
 
+
 ```bash
-kubectl get tackle -n konveyor-tackle
-kubectl get pods -n konveyor-tackle
-kubectl get svc -n konveyor-tackle
+# Check that the Tackle custom resource exists in your operator namespace
+kubectl get tackle -n my-konveyor-operator
+
+# Check that all pods are running in your operator namespace
+kubectl get pods -n my-konveyor-operator
+
+# Check that the required services are available in your operator namespace
+kubectl get svc -n my-konveyor-operator
 ```
+
+You should see:
+- A `tackle` resource listed.
+- All pods (`tackle-operator`, `tackle-ui`, `tackle-hub`, etc.) in the `Running` state.
+- Services `tackle-ui` and `tackle-hub` available.
 
 ---
 
@@ -106,6 +115,32 @@ Open your browser and navigate to [http://localhost:8080](http://localhost:8080)
 - Keep the port-forward command running to access the UI.
 
 ---
+
+## Cleanup
+
+If you want to remove all Konveyor resources and your minikube cluster to free up system resources or start fresh, follow these steps:
+
+```bash
+# 1. Delete the Tackle custom resource (optional)
+kubectl delete tackle tackle -n my-konveyor-operator
+
+# 2. Delete the Konveyor operator and its namespace
+kubectl delete namespace my-konveyor-operator
+
+# 3. (If you created a separate konveyor-tackle namespace, delete it as well)
+kubectl delete namespace konveyor-tackle
+
+# 4. Delete the OLM (Operator Lifecycle Manager) components (optional)
+kubectl delete -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
+
+# 5. Delete the entire minikube cluster (this removes all workloads and data)
+minikube delete -p konveyor-demo
+
+# 6. (Optional) Delete all minikube clusters on your system
+minikube delete --all
+```
+
+> **Note:** Deleting the minikube cluster will remove all applications, namespaces, and persistent data associated with that cluster.
 
 # Spring PetClinic Modernisation
 
