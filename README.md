@@ -1,6 +1,12 @@
 # app-modernisation-demo
 
-This project demonstrates application modernization using [Konveyor](https://konveyor.io/) on a local Kubernetes cluster with [minikube](https://minikube.sigs.k8s.io/). It includes step-by-step instructions for setting up Konveyor and modernizing the Spring PetClinic application.
+This project demonstrates application modernization using [Konveyor](https://konveyor.io/) on a local Kubernetes cluster with [minikube](https://minikube.sigs.k8s.io/).  
+It includes step-by-step instructions for setting up Konveyor and modernizing the Spring PetClinic application.
+
+> **References followed:**  
+> - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)  
+> - [Kube by Example: Install Konveyor and Analyze Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application)  
+> - [Konveyor Operator Installation (macOS)](https://github.com/konveyor/operator/blob/main/docs/installation-macos.md)
 
 ---
 
@@ -28,7 +34,6 @@ sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
 sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
 ```
-
 > **Note:** Adjust the download URLs if you are using Intel-based Macs or Linux.
 
 ---
@@ -38,23 +43,42 @@ sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
 Initialize a minikube cluster with sufficient resources:
 
 ```bash
-# 1. Start minikube with enough resources
 minikube start --cpus=4 --memory=8192 --disk-size=40g -p konveyor-demo
-
-# 2. Enable ingress and OLM addons (OLM is optional if you install it manually)
 minikube addons enable ingress
 minikube addons enable olm
+```
 
-# 3. (If OLM addon is not available or fails, install OLM manually)
+If the OLM addon is not available or fails, install OLM manually:
+```bash
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
+```
 
-# 4. Install the Konveyor operator from OperatorHub
+---
+
+### Install Konveyor Operator
+
+```bash
 kubectl create -f https://operatorhub.io/install/konveyor-operator.yaml
+```
 
-# 5. Wait for the operator pod to be running
+---
+
+### Verify Operator Installation
+
+```bash
+# Check that the operator pod is running
 kubectl get pods -n my-konveyor-operator
 
-# 6. Create the Tackle custom resource
+# Check that the Tackle CRD is installed
+kubectl get crds | grep tackle
+```
+You should see a pod like `tackle-operator-xxxx` in the `Running` state and a CRD named `tackles.tackle.konveyor.io`.
+
+---
+
+### Deploy Tackle Custom Resource
+
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: tackle.konveyor.io/v1alpha1
 kind: Tackle
@@ -64,31 +88,22 @@ metadata:
 spec:
   feature_auth_required: false
 EOF
-
-# 7. Wait for all Tackle pods to be running
-kubectl get pods -n my-konveyor-operator
-
-# 8. Port-forward the UI and access it in your browser
-kubectl port-forward service/tackle-ui 8080:8080 -n my-konveyor-operator
-# Then open http://localhost:8080
 ```
 
 ---
 
-### Verify Installation
-
+### Verify Tackle Deployment
 
 ```bash
-# Check that the Tackle custom resource exists in your operator namespace
+# Check that the Tackle custom resource exists
 kubectl get tackle -n my-konveyor-operator
 
-# Check that all pods are running in your operator namespace
+# Check that all pods are running
 kubectl get pods -n my-konveyor-operator
 
-# Check that the required services are available in your operator namespace
+# Check that the required services are available
 kubectl get svc -n my-konveyor-operator
 ```
-
 You should see:
 - A `tackle` resource listed.
 - All pods (`tackle-operator`, `tackle-ui`, `tackle-hub`, etc.) in the `Running` state.
@@ -101,9 +116,8 @@ You should see:
 Set up port forwarding to access the UI:
 
 ```bash
-kubectl port-forward svc/tackle-ui 8080:8080 -n konveyor-tackle
+kubectl port-forward svc/tackle-ui 8080:8080 -n my-konveyor-operator
 ```
-
 Open your browser and navigate to [http://localhost:8080](http://localhost:8080).
 
 ---
@@ -139,8 +153,9 @@ minikube delete -p konveyor-demo
 # 6. (Optional) Delete all minikube clusters on your system
 minikube delete --all
 ```
-
 > **Note:** Deleting the minikube cluster will remove all applications, namespaces, and persistent data associated with that cluster.
+
+---
 
 # Spring PetClinic Modernisation
 
@@ -149,14 +164,9 @@ minikube delete --all
 ### Step 1: Prepare Source Code
 
 ```bash
-# Clone the Spring PetClinic repository
 git clone https://github.com/spring-projects/spring-petclinic.git
 cd spring-petclinic
-
-# Build the application to ensure it works
 ./mvnw clean package -DskipTests
-
-# Create a ZIP file for upload to Konveyor
 zip -r petclinic-source.zip . -x '*.git*' 'target/*'
 ```
 
@@ -164,7 +174,7 @@ zip -r petclinic-source.zip . -x '*.git*' 'target/*'
 
 ### Step 2: Upload to Konveyor
 
-- Ensure port-forwarding is running (`kubectl port-forward svc/tackle-ui 8080:8080 -n konveyor-tackle`)
+- Ensure port-forwarding is running (`kubectl port-forward svc/tackle-ui 8080:8080 -n my-konveyor-operator`)
 - Open [http://localhost:8080](http://localhost:8080)
 - Navigate to **Applications → Create Application**
 - Upload `petclinic-source.zip`
@@ -183,7 +193,7 @@ zip -r petclinic-source.zip . -x '*.git*' 'target/*'
 Monitor analysis progress:
 
 ```bash
-kubectl logs -l app=tackle-analyzer -n konveyor-tackle -f
+kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
 ```
 
 ---
@@ -222,10 +232,10 @@ kubectl port-forward svc/petclinic-service 8080:8080
 
 ## Troubleshooting
 
-- Ensure all pods in the `konveyor-tackle` namespace are running.
+- Ensure all pods in the `my-konveyor-operator` namespace are running.
 - If you encounter issues, check logs with:
   ```bash
-  kubectl logs <pod-name> -n konveyor-tackle
+  kubectl logs <pod-name> -n my-konveyor-operator
   ```
 - For more help, see the [Konveyor documentation](https://konveyor.github.io/tackle2-operator/).
 
@@ -236,6 +246,8 @@ kubectl port-forward svc/petclinic-service 8080:8080
 - [Konveyor Tackle2 Operator](https://github.com/konveyor/tackle2-operator)
 - [Spring PetClinic](https://github.com/spring-projects/spring-petclinic)
 - [Minikube Documentation](https://minikube.sigs.k8s.io/docs/)
+- [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)
+- [Kube by Example: Install Konveyor and Analyze Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application)
 
 
 
