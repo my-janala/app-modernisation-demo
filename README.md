@@ -157,90 +157,6 @@ minikube delete --all
 
 ---
 
-# Spring PetClinic Modernisation
-
-## Deploy PetClinic with Konveyor Tackle
-
-### Step 1: Prepare Source Code
-
-```bash
-git clone https://github.com/spring-projects/spring-petclinic.git
-cd spring-petclinic
-./mvnw clean package -DskipTests
-zip -r petclinic-source.zip . -x '*.git*' 'target/*'
-```
-
----
-
-### Step 2: Upload to Konveyor
-
-- Ensure port-forwarding is running (`kubectl port-forward svc/tackle-ui 8080:8080 -n my-konveyor-operator`)
-- Open [http://localhost:8080](http://localhost:8080)
-- Navigate to **Applications → Create Application**
-- Upload `petclinic-source.zip`
-
----
-
-### Step 3: Run Analysis
-
-- In the Konveyor UI:
-  1. Go to **Analysis → Create Analysis**
-  2. Select the `Spring PetClinic` application
-  3. Choose targets: **Containerization** and **Kubernetes**
-  4. (Optional) Select rules: **Spring Boot to Quarkus**
-  5. Click **Run Analysis**
-
-Monitor analysis progress:
-
-```bash
-kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
-```
-
----
-
-### Step 4: Build Container Image
-
-A sample [Dockerfile](./Dockerfile) is provided in this repository. Build your image as needed.
-
----
-
-### Step 5: Deploy to Kubernetes
-
-```bash
-kubectl apply -f petclinic-deployment.yaml
-
-# Check deployment status
-kubectl get pods -l app=petclinic
-kubectl get svc petclinic-service
-```
-
----
-
-### Step 6: Access the Application
-
-```bash
-# Get the service URL
-minikube service petclinic-service --url
-
-# Or use port forwarding
-kubectl port-forward svc/petclinic-service 8080:8080
-
-# Then open http://localhost:8080 in your browser
-```
-
----
-
-## Troubleshooting
-
-- Ensure all pods in the `my-konveyor-operator` namespace are running.
-- If you encounter issues, check logs with:
-  ```bash
-  kubectl logs <pod-name> -n my-konveyor-operator
-  ```
-- For more help, see the [Konveyor documentation](https://konveyor.github.io/tackle2-operator/).
-
----
-
 # Analyzing a Legacy Java Application with Konveyor
 
 This section demonstrates how to analyze a legacy Java application using Konveyor, following the ["Let's Get Started with Analysis Module"](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application) guideline.  
@@ -291,16 +207,14 @@ try (InputStream inputStream = new FileInputStream("/opt/config/persistence.prop
 - Hardcoded file paths make configuration updates difficult and less portable.
 
 **How to modernize:**  
-
-**How to modernize:**  
 How you address this depends on the function of the file in local storage:
 
 - **Logging:** Log to standard output and use a centralized log collector to analyze the logs.
 - **Caching:** Use a cache backing service (such as Redis or Memcached) instead of writing cache data to the local file system.
 - **Configuration:** Store configuration settings in environment variables or mount them into the container using Kubernetes ConfigMaps, so they can be updated without code changes.
 - **Data storage:** Use a database backing service for relational data or a persistent data storage system, rather than writing to local files.
-- **Temporary data storage:** Use the file system of a running container only for brief, single-transaction caches or temporary files that can be safely lost if the
-
+- **Temporary data storage:** Use the file system of a running container only for brief, single-transaction caches or temporary files that can be safely lost if the container restarts.
+- Use **environment variables** for configuration, or mount configuration files using **Kubernetes ConfigMaps**.
 
 **Example (ConfigMap as file):**
 ```yaml
@@ -361,6 +275,44 @@ Where `oracle-db-service` is the name of your Kubernetes Service for the databas
 |----------------------|-----------------------------------|-------------------------------------------------|
 | File system Java IO  | Ephemeral storage, hard to update | Use env vars or ConfigMaps for configuration    |
 | Hardcoded IP Address | Not portable, hard to maintain    | Use env vars/ConfigMaps, reference by DNS name  |
+
+---
+
+## Application Modernization Review Actions
+
+When reviewing applications with Konveyor, you may be presented with several modernization strategy options. These are commonly referred to as the "5 Rs" of application modernization:
+
+### **1. Rehost ("Lift and Shift")**
+Move the application as-is from its current environment (such as on-premises or a VM) to a new infrastructure, typically the cloud or Kubernetes, with minimal or no code changes.  
+**Use when:** You want a quick migration with minimal risk and effort, and the application is stable.
+
+### **2. Replatform ("Lift, Tinker, and Shift")**
+Move the application to a new platform, making minimal changes to leverage cloud or container features, but not altering the core architecture.  
+**Use when:** You want to take advantage of new platform features (like managed databases or container orchestration) with minimal code changes.
+
+### **3. Refactor ("Re-architect")**
+Make significant changes to the application’s code or architecture to improve maintainability, scalability, or performance, or to adopt cloud-native patterns.  
+**Use when:** The application needs modernization to meet new business requirements or resolve technical debt (e.g., breaking up a monolith into microservices).
+
+### **4. Repurchase ("Drop and Shop")**
+Replace the existing application with a new, often SaaS-based, solution that provides similar or improved functionality.  
+**Use when:** Maintaining or modernizing the current application is not cost-effective, and a commercial off-the-shelf (COTS) or SaaS solution meets business needs.
+
+### **5. Retire**
+Decommission the application because it is no longer needed or its functionality is duplicated elsewhere.  
+**Use when:** The application is obsolete, unused, or redundant, and retiring it reduces costs and complexity.
+
+---
+
+| Action      | Description                                                                 | When to Use                                      |
+|-------------|-----------------------------------------------------------------------------|--------------------------------------------------|
+| Rehost      | Move as-is to new infrastructure                                            | Quick migration, minimal changes                  |
+| Replatform  | Move with minimal changes to leverage new platform features                 | Gain platform benefits, minor tweaks              |
+| Refactor    | Redesign or rewrite to improve or modernize                                 | Address technical debt, adopt new architectures   |
+| Repurchase  | Replace with a new (often SaaS) solution                                    | COTS/SaaS meets needs better than custom code     |
+| Retire      | Decommission the application                                                | App is obsolete, unused, or redundant             |
+
+These actions help you choose the best modernization strategy for each application, balancing effort, risk, and business value.
 
 ---
 
