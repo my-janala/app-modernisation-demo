@@ -25,17 +25,51 @@ Konveyor provides automated analysis, actionable recommendations, and tools to h
 
 ---
 
+## Why Modernize a Legacy Tomcat Application?
+
+Many organizations still rely on legacy Java applications running on platforms like Apache Tomcat, such as the [example-1 application](https://github.com/konveyor/example-applications/tree/main/example-1) used in this demo. These applications often support critical business processes but present several challenges in modern IT environments:
+
+- **Operational Complexity:** Legacy Tomcat applications are typically deployed on physical servers or VMs, requiring manual management, patching, and scaling.
+- **Limited Scalability:** Scaling to meet demand is difficult and often requires significant infrastructure changes.
+- **Security Risks:** Older platforms may lack modern security features and are harder to keep up-to-date with patches.
+- **High Maintenance Costs:** Maintaining legacy environments can be expensive due to aging hardware, software licenses, and specialized skills.
+- **Lack of Agility:** Integrating with modern cloud services, CI/CD pipelines, or adopting DevOps practices is challenging with legacy architectures.
+- **Technical Debt:** Over time, customizations and outdated dependencies accumulate, making the application harder to maintain and evolve.
+
+**Modernization**—using tools like Konveyor—enables organizations to address these challenges by:
+- Migrating legacy applications to cloud-native platforms (like Kubernetes).
+- Improving scalability, reliability, and security.
+- Reducing operational costs and technical debt.
+- Enabling faster development cycles and easier integration with modern services.
+
+By analyzing a legacy Tomcat application with Konveyor, you can identify modernization opportunities, receive actionable recommendations, and plan a migration path that aligns with your business goals—transforming your legacy workloads into agile, cloud-ready solutions.
+
+---
+
 ## About Konveyor and KAI
 
 **Konveyor** is an open-source toolkit designed to accelerate and simplify the application modernization journey. It provides automated analysis, actionable recommendations, and tools to help teams migrate, refactor, and replatform legacy applications for cloud-native environments. Konveyor modules like **Tackle** analyze application source code, identify modernization opportunities, and generate migration assets such as Dockerfiles and Kubernetes manifests. This enables organizations to assess their application portfolios, understand technical debt, and plan effective modernization strategies.
 
-**KAI (Konveyor AI)** is an AI-powered extension of Konveyor that brings advanced code analysis and intelligent modernization recommendations to the process. KAI uses machine learning models to scan application source code, detect patterns, and suggest actionable improvements—such as refactoring opportunities, cloud-native migration paths, and security enhancements. By integrating KAI into your workflow, you gain deeper insights and smarter guidance, making it easier to modernize legacy applications and adopt cloud-native best practices.
+**KAI (Konveyor AI)** is an AI-powered extension of Konveyor that brings advanced code analysis and intelligent modernization recommendations to the process.  
+KAI leverages large language models (LLMs) and AI techniques to deeply analyze application source code, configuration, and architecture. It goes beyond traditional static analysis by understanding code semantics, business logic, and modernization patterns. KAI can identify migration blockers, suggest refactoring opportunities, and recommend cloud-native architectures tailored to your application's needs.
+
+**Key features of KAI include:**
+- **Deep Code Understanding:** Uses AI to interpret code structure, dependencies, and business logic.
+- **Modernization Recommendations:** Provides actionable suggestions for refactoring, replatforming, and containerization.
+- **Migration Blocker Detection:** Identifies issues that may hinder cloud migration or modernization.
+- **Contextual Guidance:** Offers insights based on your application's unique context, not just generic rules.
+- **Continuous Learning:** Improves recommendations over time as it learns from more codebases and modernization projects.
+
+By integrating KAI into your workflow, you gain deeper insights and smarter guidance, making it easier to modernize legacy applications and adopt cloud-native best practices.  
+KAI helps organizations move beyond manual analysis, enabling faster, more accurate, and more confident modernization decisions.
 
 Together, **Konveyor and KAI** help organizations:
 - Analyze legacy applications and identify modernization opportunities.
 - Automate the generation of migration assets for containers and Kubernetes.
 - Receive AI-driven recommendations for refactoring, replatforming, and improving code quality.
 - Accelerate the journey to cloud-native architectures with confidence and efficiency.
+
+> For more details, see the [KAI Deep Dive blog post](https://konveyor.io/blog/2024/kai-deep-dive-2024/).
 
 ---
 
@@ -358,6 +392,11 @@ Where `oracle-db-service` is the name of your Kubernetes Service for the databas
 
 ---
 
+![What to do after an application is reviewed and analysed by Konveyor](images/modernisation-overview.png)
+*Figure: What to do after an application is reviewed and analysed by Konveyor*
+
+---
+
 ## Application Modernization Review Actions
 
 When reviewing applications with Konveyor, you may be presented with several modernization strategy options. These are commonly referred to as the "5 Rs" of application modernization:
@@ -419,6 +458,7 @@ These actions help you choose the best modernization strategy for each applicati
 - [Minikube Documentation](https://minikube.sigs.k8s.io/docs/)
 - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)
 - [Kube by Example: Install Konveyor and Analyze Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyze-legacy-java-application)
+- [Konveyor Methodology](https://github.com/konveyor/methodology)
 
 
 
