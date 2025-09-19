@@ -1,4 +1,4 @@
-# .gitignore
+# .gitignore for app-modernisation-demo
 
 # Python
 __pycache__/
@@ -14,6 +14,8 @@ env/
 dist/
 build/
 pip-wheel-metadata/
+.pytest_cache/
+.coverage
 
 # Go
 bin/
@@ -32,10 +34,13 @@ pkg/
 target/
 out/
 *.log
+.flattened-pom.xml
+dependency-reduced-pom.xml
 
 # Maven
 .mvn/
 !/.mvn/wrapper/maven-wrapper.jar
+.m2/
 
 # Gradle
 .gradle/
@@ -49,6 +54,17 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+.pnpm-store/
+.npm/
+.yarn/
+
+# Frontend frameworks
+.angular/
+.next/
+.nuxt/
+dist/
+coverage/
+storybook-static/
 
 # IDEs and Editors
 .idea/
@@ -58,6 +74,13 @@ yarn.lock
 .vscode/
 *.swp
 *.swo
+*~
+.project
+.classpath
+.settings/
+.factorypath
+nbproject/
+.netbeans/
 
 # OS files
 .DS_Store
@@ -76,6 +99,7 @@ nohup.out
 *.db
 *.sqlite
 *.sql
+.h2/
 
 # Archives and compressed files
 *.zip
@@ -86,11 +110,53 @@ nohup.out
 *.rar
 *.7z
 
+# Kubernetes and Container files
+*.kube/
+*.minikube/
+kubeconfig
+.kube-config/
+.dockerignore
+kubectl-debug/
+
+# Konveyor specific
+.konveyor/
+.tackle/
+mta-*/
+konveyor-*/
+.kai-cache/
+.kai-reports/
+tackle-reports/
+
+# Application server specific
+tomcat*/
+.tomcat*/
+.liberty/
+.wildfly/
+.payara/
+.glassfish/
+
+# AI and ML related
+*.pt
+*.onnx
+*.tflite
+*.pb
+.ipynb_checkpoints/
+
 # Misc
 *.tmp
 *.bak
 *.old
 *.orig
+.cache/
+.env.*
+!.env.example
+.secrets/
+*.pid
+*.seed
+tmp/
+temp/
+.history/
+.terraform/
 
 # Test output
 test-output/

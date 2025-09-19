@@ -4,11 +4,12 @@
 
 - [Context: Application Modernisation and Konveyor](#context-application-modernisation-and-konveyor)
 - [Why Modernise a Legacy Tomcat Application?](#why-modernise-a-legacy-tomcat-application)
+- [About Konveyor and KAI](#about-konveyor-and-kai)
+- [Dedicated KAI Section](#dedicated-kai-section)
+- [More About Konveyor](#more-about-konveyor)
 - [Analysing a Legacy Java Application with Konveyor](#analysing-a-legacy-java-application-with-konveyor)
 - [Next Steps After Application Analysis](#next-steps-after-application-analysis)
 - [Diagram Overview](#diagram-overview)
-- [About Konveyor and KAI](#about-konveyor-and-kai)
-- [More About Konveyor](#more-about-konveyor)
 - [Konveyor Installation Guide](#konveyor-installation-guide)
 - [Troubleshooting](#troubleshooting)
 - [References](#references)
@@ -19,24 +20,19 @@
 
 Application modernisation is the process of transforming legacy software systems to leverage modern technologies, architectures, and cloud-native platforms. This enables organisations to improve scalability, reliability, security, and agility, while reducing technical debt and operational costs.
 
-Modernisation is not a one-size-fits-all journey. The right approach depends on the application's current state, business requirements, and future goals. The most common strategies are known as the "Rs" of modernisation, and Konveyor helps teams evaluate and execute these options:
+Modernisation is not a one-size-fits-all journey. The right approach depends on the application's current state, business requirements, and future goals. The most common strategies are known as the "Rs" of modernisation, and Konveyor helps teams evaluate and execute these options.
 
-- **Rehost ("Lift and Shift")**: Move the application as-is to a new infrastructure (such as cloud or Kubernetes) with minimal or no code changes. This is the fastest way to migrate workloads, reducing risk and effort, but does not address underlying technical debt or take full advantage of cloud-native features.
-  - *Use-case:* Migrating a legacy Java application from a physical server to a Kubernetes cluster without changing the code, just containerising and deploying.
+**Konveyor and the Six Modernisation Strategies:**  
+According to the [Konveyor Modernization Report](https://konveyor.io/modernization-report/), there are six key strategies for application modernisation:
 
-- **Replatform ("Lift, Tinker, and Shift")**: Move the application to a new platform, making small changes to leverage platform features (such as containerisation, managed databases, or environment variable-based configuration). This approach improves manageability and scalability without a full rewrite.
-  - *Use-case:* Updating a Java application to use environment variables for configuration and deploying it on Kubernetes, but keeping the application's structure the same.
-
-- **Refactor ("Re-architect")**: Make significant changes to the application's code or architecture to improve maintainability, scalability, or performance, or to adopt cloud-native patterns. Refactoring may involve breaking up monoliths into microservices, adopting new frameworks, or redesigning for cloud-native best practices. This approach delivers the greatest long-term benefits but requires more time and investment.
-  - *Use-case:* Splitting a monolithic Java application into microservices, adopting Spring Boot, and redesigning for cloud-native deployment.
-
+- **Retain:** Keep the application as-is if it continues to deliver value and meets requirements.
+- **Retire:** Decommission applications that are no longer needed.
+- **Rehost ("Lift and Shift")**: Move the application as-is to a new infrastructure (such as cloud or Kubernetes) with minimal or no code changes.
+- **Replatform ("Lift, Tinker, and Shift")**: Move the application to a new platform, making small changes to leverage platform features (such as containerisation, managed databases, or environment variable-based configuration).
+- **Refactor ("Re-architect")**: Make significant changes to the application's code or architecture to improve maintainability, scalability, or performance, or to adopt cloud-native patterns.
 - **Repurchase ("Drop and Shop")**: Replace the existing application with a new, often SaaS-based, solution that provides similar or improved functionality.
-  - *Use-case:* Replacing a custom-built CRM system with Salesforce or another SaaS CRM platform.
 
-- **Retire**: Decommission the application because it is no longer needed or its functionality is duplicated elsewhere.
-  - *Use-case:* Shutting down an old reporting tool that is no longer accessed because its functionality has been replaced by a newer analytics platform.
-
-Konveyor provides automated analysis, actionable recommendations, and tools to help teams choose and implement the best modernisation strategy for each application. By supporting rehosting, replatforming, refactoring, repurchasing, and retiring, Konveyor enables organisations to modernise at their own pace and according to their unique needs.
+Konveyor provides automated analysis, actionable recommendations, and tools to help teams choose and implement the best modernisation strategy for each application. By supporting all six strategies, Konveyor enables organisations to modernise at their own pace and according to their unique needs.
 
 ---
 
@@ -58,6 +54,94 @@ Many organisations still rely on legacy Java applications running on platforms l
 - Enabling faster development cycles and easier integration with modern services.
 
 By analysing a legacy Tomcat application with Konveyor, you can identify modernisation opportunities, receive actionable recommendations, and plan a migration path that aligns with your business goals—transforming your legacy workloads into agile, cloud-ready solutions.
+
+---
+
+## About Konveyor and KAI
+
+**Konveyor** is an open-source toolkit designed to accelerate and simplify the application modernisation journey. It provides automated analysis, actionable recommendations, and tools to help teams migrate, refactor, and replatform legacy applications for cloud-native environments. Konveyor modules like **Tackle**, **Konveyor Hub**, **Konveyor CLI**, and **Konveyor AI (KAI)** analyse application source code, identify modernisation opportunities, and generate migration assets such as Dockerfiles and Kubernetes manifests. This enables organisations to assess their application portfolios, understand technical debt, and plan effective modernisation strategies.
+
+**Migration Toolkit for Applications (MTA)** is a Red Hat product built on the upstream open-source Konveyor project. MTA provides enterprise support and additional features, making it suitable for organisations seeking a supported solution for application modernisation.  
+For this demo, MTA was used to analyse and modernise a legacy Java application for a potential client.  
+Learn more: [MTA Overview](https://developers.redhat.com/products/mta/overview)
+
+**KAI (Konveyor AI)** is introduced here as part of this toolkit, supporting advanced AI-driven analysis. Further details on KAI are provided in the dedicated section below.
+
+---
+
+## Dedicated KAI Section
+
+This section focuses on KAI, the AI-powered extension to Konveyor that enhances application modernisation by leveraging advanced large language models (LLMs).
+
+**Overview of KAI:**  
+KAI provides deep code analysis by interpreting application source code, configuration, and architecture. It not only flags potential issues but also provides actionable recommendations for refactoring, replatforming, and containerisation, tailored to your application’s needs. By integrating KAI into your modernisation workflow, organisations can achieve faster, more accurate, and more confident transitions to cloud-native architectures.
+
+**LLM Selection and Configuration:**  
+KAI is built upon state-of-the-art large language models, and its effectiveness hinges on selecting the right LLM for your use case. The [LLM Selection Guidelines](https://github.com/konveyor/kai/blob/main/docs/llm_selection.md) offer detailed advice on:
+- Choosing a model that balances performance, cost, and domain-specific requirements.
+- Configuring model parameters to optimise analysis accuracy and efficiency.
+- Understanding trade-offs between different LLMs and customising prompt engineering to fine-tune outputs.
+
+**Benefits of Using KAI:**  
+- **Deep Analysis:** Go beyond static code checks to understand semantic issues and business logic.
+- **Actionable Insights:** Receive clear recommendations that can be directly applied to modernisation efforts.
+- **Continuous Improvement:** As KAI processes more codebases and garners feedback, its recommendations become increasingly refined.
+- **Support for Modern Workflows:** Seamlessly integrate with Konveyor’s other modules for a full end-to-end modernisation solution.
+
+By leveraging these capabilities, KAI not only reduces the manual effort required in code analysis but also empowers teams to tackle migration blockers and complexity head-on.
+
+---
+
+## More About Konveyor
+
+[Konveyor](https://konveyor.io/) is an open-source community and toolkit focused on accelerating application modernisation. The project provides a set of tools, methodologies, and best practices to help organisations migrate, refactor, and replatform their legacy applications for cloud-native environments.
+
+Konveyor’s approach is guided by the [Konveyor Methodology](https://github.com/konveyor/methodology), which offers a structured framework for modernisation projects. This methodology helps teams assess their application portfolios, prioritise modernisation efforts, and choose the right strategy (such as rehosting, replatforming, or refactoring) for each application.
+
+### Key Principles of the Konveyor Methodology
+
+- **Portfolio Assessment:**  
+  Analyse and categorise applications based on business value, technical debt, and modernisation complexity.
+
+- **Modernisation Strategies:**  
+  Apply the six strategies ([Retain, Retire, Rehost, Replatform, Refactor, Repurchase](https://konveyor.io/modernization-report/)) to select the most suitable modernisation path for each application.
+
+- **Automated Analysis:**  
+  Use tools like Konveyor Tackle, Hub, CLI, and KAI to automate code analysis, identify migration blockers, and generate actionable recommendations.
+
+- **Incremental Transformation:**  
+  Modernise applications in stages, starting with quick wins and progressing to deeper architectural changes as needed.
+
+- **Collaboration and Documentation:**  
+  Encourage cross-functional collaboration and maintain clear documentation throughout the modernisation journey.
+
+### Konveyor Toolkit
+
+- **Tackle:** Automated analysis and migration planning for application portfolios.
+- **KAI:** AI-powered code analysis and modernisation recommendations.
+- **Move2Kube:** Automated containerisation and Kubernetes deployment asset generation.
+- **Forklift:** Infrastructure migration for virtual machines and workloads.
+- **Konveyor Hub:** Centralised platform for managing assessments, planning, and execution.
+- **Konveyor CLI:** Command-line interface for automation and integration.
+
+### Why Use Konveyor?
+
+- **Accelerate Modernisation:** Reduce manual effort and risk with automated tools and proven methodologies.
+- **Cloud-Native Readiness:** Prepare legacy applications for containers, Kubernetes, and cloud platforms.
+- **Community-Driven:** Benefit from open-source innovation and shared best practices.
+- **End-to-End Guidance:** From assessment to migration, Konveyor supports every step of the modernisation process.
+
+For more details, see the [Konveyor Methodology repository](https://github.com/konveyor/methodology), [Konveyor website](https://konveyor.io/), and [Konveyor Modernization Report](https://konveyor.io/modernization-report/).
+
+---
+
+This project demonstrates application modernisation using [Migration Toolkit for Applications (MTA)](https://developers.redhat.com/products/mta/overview), built on upstream [Konveyor](https://konveyor.io/), on a local Kubernetes cluster with [minikube](https://minikube.sigs.k8s.io/).  
+It includes step-by-step instructions for setting up Konveyor and modernising Java applications, including the Spring PetClinic and a sample legacy Java application.
+
+> **References followed:**  
+> - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)  
+> - [Kube by Example: Install Konveyor and Analyse Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application)  
+> - [Konveyor Operator Installation (macOS)](https://github.com/konveyor/operator/blob/main/docs/installation-macos.md)
 
 ---
 
@@ -233,88 +317,6 @@ The diagram presents a well-structured workflow for modernising legacy applicati
 
 ---
 
-## About Konveyor and KAI
-
-**Konveyor** is an open-source toolkit designed to accelerate and simplify the application modernisation journey. It provides automated analysis, actionable recommendations, and tools to help teams migrate, refactor, and replatform legacy applications for cloud-native environments. Konveyor modules like **Tackle** analyse application source code, identify modernisation opportunities, and generate migration assets such as Dockerfiles and Kubernetes manifests. This enables organisations to assess their application portfolios, understand technical debt, and plan effective modernisation strategies.
-
-**Migration Toolkit for Applications (MTA)** is a Red Hat product built on the upstream open-source Konveyor project. MTA provides enterprise support and additional features, making it suitable for organisations seeking a supported solution for application modernisation.  
-For this demo, MTA was used to analyse and modernise a legacy Java application for a potential client.  
-Learn more: [MTA Overview](https://developers.redhat.com/products/mta/overview)
-
-**KAI (Konveyor AI)** is an AI-powered extension of Konveyor that brings advanced code analysis and intelligent modernisation recommendations to the process.  
-KAI leverages large language models (LLMs) and AI techniques to deeply analyse application source code, configuration, and architecture. It goes beyond traditional static analysis by understanding code semantics, business logic, and modernisation patterns. KAI can identify migration blockers, suggest refactoring opportunities, and recommend cloud-native architectures tailored to your application's needs.
-
-**Key features of KAI include:**
-- **Deep Code Understanding:** Uses AI to interpret code structure, dependencies, and business logic.
-- **Modernisation Recommendations:** Provides actionable suggestions for refactoring, replatforming, and containerisation.
-- **Migration Blocker Detection:** Identifies issues that may hinder cloud migration or modernisation.
-- **Contextual Guidance:** Offers insights based on your application's unique context, not just generic rules.
-- **Continuous Learning:** Improves recommendations over time as it learns from more codebases and modernisation projects.
-
-By integrating KAI into your workflow, you gain deeper insights and smarter guidance, making it easier to modernise legacy applications and adopt cloud-native best practices.  
-KAI helps organisations move beyond manual analysis, enabling faster, more accurate, and more confident modernisation decisions.
-
-Together, **Konveyor and KAI** help organisations:
-- Analyse legacy applications and identify modernisation opportunities.
-- Automate the generation of migration assets for containers and Kubernetes.
-- Receive AI-driven recommendations for refactoring, replatforming, and improving code quality.
-- Accelerate the journey to cloud-native architectures with confidence and efficiency.
-
-> For more details, see the [KAI Deep Dive blog post](https://konveyor.io/blog/2024/kai-deep-dive-2024/).
-
----
-
-## More About Konveyor
-
-[Konveyor](https://konveyor.io/) is an open-source community and toolkit focused on accelerating application modernisation. The project provides a set of tools, methodologies, and best practices to help organisations migrate, refactor, and replatform their legacy applications for cloud-native environments.
-
-Konveyor’s approach is guided by the [Konveyor Methodology](https://github.com/konveyor/methodology), which offers a structured framework for modernisation projects. This methodology helps teams assess their application portfolios, prioritise modernisation efforts, and choose the right strategy (such as rehosting, replatforming, or refactoring) for each application.
-
-### Key Principles of the Konveyor Methodology
-
-- **Portfolio Assessment:**  
-  Analyse and categorise applications based on business value, technical debt, and modernisation complexity.
-
-- **Modernisation Strategies:**  
-  Apply the "5 Rs" (Rehost, Replatform, Refactor, Repurchase, Retire) to select the most suitable modernisation path for each application.
-
-- **Automated Analysis:**  
-  Use tools like Konveyor Tackle and KAI to automate code analysis, identify migration blockers, and generate actionable recommendations.
-
-- **Incremental Transformation:**  
-  Modernise applications in stages, starting with quick wins and progressing to deeper architectural changes as needed.
-
-- **Collaboration and Documentation:**  
-  Encourage cross-functional collaboration and maintain clear documentation throughout the modernisation journey.
-
-### Konveyor Toolkit
-
-- **Tackle:** Automated analysis and migration planning for application portfolios.
-- **KAI:** AI-powered code analysis and modernisation recommendations.
-- **Move2Kube:** Automated containerisation and Kubernetes deployment asset generation.
-- **Forklift:** Infrastructure migration for virtual machines and workloads.
-
-### Why Use Konveyor?
-
-- **Accelerate Modernisation:** Reduce manual effort and risk with automated tools and proven methodologies.
-- **Cloud-Native Readiness:** Prepare legacy applications for containers, Kubernetes, and cloud platforms.
-- **Community-Driven:** Benefit from open-source innovation and shared best practices.
-- **End-to-End Guidance:** From assessment to migration, Konveyor supports every step of the modernisation process.
-
-For more details, see the [Konveyor Methodology repository](https://github.com/konveyor/methodology) and [Konveyor website](https://konveyor.io/).
-
----
-
-This project demonstrates application modernisation using [Migration Toolkit for Applications (MTA)](https://developers.redhat.com/products/mta/overview), built on upstream [Konveyor](https://konveyor.io/), on a local Kubernetes cluster with [minikube](https://minikube.sigs.k8s.io/).  
-It includes step-by-step instructions for setting up Konveyor and modernising Java applications, including the Spring PetClinic and a sample legacy Java application.
-
-> **References followed:**  
-> - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)  
-> - [Kube by Example: Install Konveyor and Analyse Legacy Java Application](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application)  
-> - [Konveyor Operator Installation (macOS)](https://github.com/konveyor/operator/blob/main/docs/installation-macos.md)
-
----
-
 ## Konveyor Installation Guide
 
 _Follow these steps to set up Konveyor on minikube for application modernisation._
@@ -327,6 +329,11 @@ _Follow these steps to set up Konveyor on minikube for application modernisation
   [Install minikube](https://minikube.sigs.k8s.io/docs/start/)
 - **kubectl**: For interacting with Kubernetes  
   [Install kubectl](https://kubernetes.io/docs/tasks/tools/)
+- **Java 17 or later**:  
+  Check your Java version with:
+  ```bash
+  java -version
+  ```
 
 #### Quick Install Commands (for Apple Silicon)
 
@@ -453,6 +460,7 @@ Open your browser and navigate to [http://localhost:8080](http://localhost:8080)
 - [Konveyor Tackle2 Operator](https://github.com/konveyor/tackle2-operator)
 - [Konveyor Official Docs](https://konveyor.io/docs/konveyor/installation/)
 - [Konveyor Methodology](https://github.com/konveyor/methodology)
+- [Konveyor Modernization Report](https://konveyor.io/modernization-report/)
 - [Minikube Documentation](https://minikube.sigs.k8s.io/docs/)
 - [KAI Deep Dive blog post](https://konveyor.io/blog/2024/kai-deep-dive-2024/)
 
