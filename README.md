@@ -4,11 +4,12 @@
 
 - [Context: Application Modernisation and Konveyor](#context-application-modernisation-and-konveyor)
 - [Why Modernise a Legacy Tomcat Application?](#why-modernise-a-legacy-tomcat-application)
+- [Analysing a Legacy Java Application with Konveyor](#analysing-a-legacy-java-application-with-konveyor)
+- [Next Steps After Application Analysis](#next-steps-after-application-analysis)
+- [Diagram Overview](#diagram-overview)
 - [About Konveyor and KAI](#about-konveyor-and-kai)
 - [More About Konveyor](#more-about-konveyor)
 - [Konveyor Installation Guide](#konveyor-installation-guide)
-- [Analysing a Legacy Java Application with Konveyor](#analysing-a-legacy-java-application-with-konveyor)
-- [Next Steps After Application Analysis](#next-steps-after-application-analysis)
 - [Troubleshooting](#troubleshooting)
 - [References](#references)
 
@@ -57,6 +58,178 @@ Many organisations still rely on legacy Java applications running on platforms l
 - Enabling faster development cycles and easier integration with modern services.
 
 By analysing a legacy Tomcat application with Konveyor, you can identify modernisation opportunities, receive actionable recommendations, and plan a migration path that aligns with your business goals—transforming your legacy workloads into agile, cloud-ready solutions.
+
+---
+
+## Analysing a Legacy Java Application with Konveyor
+
+This section demonstrates how to analyse a legacy Java application using Konveyor (and MTA), following the ["Let's Get Started with Analysis Module"](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application) guideline.  
+_Note: In the latest Konveyor UI, analysis results may appear under the **Issues** tab rather than a dedicated Reports section._
+
+### Step 1: Create an Application Entry in Konveyor
+
+1. In the Konveyor UI, go to the **Analysis** tab and click **Create Application**.
+2. Fill in the application details:
+    - **Name:** `customer-tomcat`
+3. Expand the **Source Code** section and enter the following:
+    - **Repository Type:** `Git`
+    - **Source Repository:** `https://github.com/konveyor/example-applications`
+    - **Branch:** `main`
+    - **Root path:** `/example-1/`
+4. Click the **Create** button.
+
+### Step 2: Run an Analysis
+
+1. In the Konveyor UI, select the `customer-tomcat` application you just created.
+2. Click **Analyse** (or **Create Analysis**).
+3. Choose relevant targets (e.g., **Containerisation**, **Kubernetes**).
+4. (Optional) Select migration rules if applicable.
+5. Click **Run Analysis**.
+6. Monitor progress in the UI or with:
+    ```bash
+    kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+    ```
+
+### Step 3: Review Analysis Results
+
+- After the analysis completes, go to your application's **Issues** tab in the Konveyor UI (not the Reports section).
+- Review the list of issues and recommendations.
+
+#### Example Issues and How to Address Them
+
+##### 1. File System - Java IO
+
+**Issue:**  
+The application reads configuration from a file inside the container, e.g.:
+```java
+try (InputStream inputStream = new FileInputStream("/opt/config/persistence.properties")) {
+    properties.load(inputStream);
+}
+```
+**Why it's a problem:**  
+- Container file systems are ephemeral; files may be lost on restart or redeploy.
+- Hardcoded file paths make configuration updates difficult and less portable.
+
+**How to modernise:**  
+How you address this depends on the function of the file in local storage:
+
+- **Logging:** Log to standard output and use a centralised log collector to analyse the logs.
+- **Caching:** Use a cache backing service (such as Redis or Memcached) instead of writing cache data to the local file system.
+- **Configuration:** Store configuration settings in environment variables or mount them into the container using Kubernetes ConfigMaps, so they can be updated without code changes.
+- **Data storage:** Use a database backing service for relational data or a persistent data storage system, rather than writing to local files.
+- **Temporary data storage:** Use the file system of a running container only for brief, single-transaction caches or temporary files that can be safely lost if the container restarts.
+- Use **environment variables** for configuration, or mount configuration files using **Kubernetes ConfigMaps**.
+
+**Example (ConfigMap as file):**
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  persistence.properties: |
+    key1=value1
+    key2=value2
+---
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: your-app
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: app-config
+```
+Or, refactor your Java code to read from environment variables.
+
+---
+
+##### 2. Hardcoded IP Address
+
+**Issue:**  
+The application uses a hardcoded IP address in its configuration, e.g.:
+```properties
+jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1
+```
+**Why it's a problem:**  
+- Hardcoded IPs make the app less portable and harder to move between environments.
+- If the database IP changes, you must rebuild or manually edit your config.
+
+**How to modernise:**  
+- Use **environment variables** or **Kubernetes ConfigMaps/Secrets** for connection info.
+- Reference your database by **Kubernetes Service DNS name** instead of an IP.
+
+**Example:**
+```properties
+jdbc.url=jdbc:oracle:thin:@oracle-db-service:1521/XEPDB1
+```
+Where `oracle-db-service` is the name of your Kubernetes Service for the database.
+
+---
+
+### Summary Table
+
+| Issue                | Why It’s a Problem                | Best Practice                                   |
+|----------------------|-----------------------------------|-------------------------------------------------|
+| File system Java IO  | Ephemeral storage, hard to update | Use env vars or ConfigMaps for configuration    |
+| Hardcoded IP Address | Not portable, hard to maintain    | Use env vars/ConfigMaps, reference by DNS name  |
+
+---
+
+## Next Steps After Application Analysis
+
+The following diagram illustrates the workflow after application analysis:
+
+![What to do after an application is reviewed and analysed by Konveyor](images/modernisation-overview.png)
+*Figure: What to do after an application is reviewed and analysed by Konveyor*
+
+---
+
+## Diagram Overview
+
+The diagram presents a well-structured workflow for modernising legacy applications using the Migration Toolkit for Applications ([MTA](https://developers.redhat.com/products/mta/overview)) and Konveyor Hub, followed by containerisation and deployment via CI/CD pipelines. It effectively maps out the journey from legacy code to cloud-native deployment.
+
+### Key Components & Flow
+
+**1. Migration Toolkit for Applications (MTA)**
+- **Purpose:** Analyses legacy code, assesses modernisation effort, and generates actionable reports.
+- **Strengths:**
+  - Clear emphasis on automated code transformation.
+  - Highlights dependency analysis and configuration updates.
+- *Suggestion:* Consider adding examples of supported legacy platforms ([Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html), [.NET](https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet)) for clarity.
+
+**2. Konveyor Hub**
+- **Structure:** Centralised with six spokes—Assessment, Planning, Analysis & Transformation, Reports, Integration & Automation, Execution.
+- **Strengths:**
+  - Nicely encapsulates the lifecycle of modernisation.
+  - Shows how MTA integrates into a broader ecosystem.
+- *Suggestion:* A brief note on how Konveyor Hub interfaces with external tools (e.g., IDEs or CI platforms) could enhance understanding.
+
+**3. Typical Workflow**
+- **Steps:** Run MTA → Review reports → Apply changes → Refactor → Containerise.
+- **Strengths:** Logical and easy to follow.
+- *Suggestion:* You might want to visually differentiate manual vs. automated steps for clarity.
+
+**4. Containerisation & CI/CD**
+- **Tools Used:** Build Manager, Git Store, Automation Tools, Tekton, ArgoCD.
+- **Strengths:**
+  - Shows end-to-end pipeline from code to deployment.
+  - Includes both CI (build/push) and CD (deploy via ArgoCD).
+- *Suggestion:* Consider adding security scanning or testing stages (e.g., [Trivy](https://aquasecurity.github.io/trivy/), [SonarQube](https://www.sonarqube.org/)) to reflect best practices.
+
+**5. Namespaces: Retail & ArgoCD**
+- **Retail Namespace:**
+  - Illustrates a microservices architecture with frontend, gateway API, and multiple DBs (Oracle, PgSQL).
+- **ArgoCD Namespace:**
+  - Demonstrates automated deployment.
+- **Strengths:** Good use of real-world examples.
+- *Suggestion:* Label the communication flow between services (e.g., REST, gRPC) for completeness.
 
 ---
 
@@ -259,205 +432,6 @@ Open your browser and navigate to [http://localhost:8080](http://localhost:8080)
 - Ensure you have at least **8GB RAM** and **40GB disk space** available.
 - The installation process may take **10-15 minutes** depending on your internet connection.
 - Keep the port-forward command running to access the UI.
-
----
-
-## Cleanup
-
-If you want to remove all Konveyor resources and your minikube cluster to free up system resources or start fresh, follow these steps:
-
-```bash
-# 1. Delete the Tackle custom resource (optional)
-kubectl delete tackle tackle -n my-konveyor-operator
-
-# 2. Delete the Konveyor operator and its namespace
-kubectl delete namespace my-konveyor-operator
-
-# 3. (If you created a separate konveyor-tackle namespace, delete it as well)
-kubectl delete namespace konveyor-tackle
-
-# 4. Delete the OLM (Operator Lifecycle Manager) components (optional)
-kubectl delete -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
-
-# 5. Delete the entire minikube cluster (this removes all workloads and data)
-minikube delete -p konveyor-demo
-
-# 6. (Optional) Delete all minikube clusters on your system
-minikube delete --all
-```
-> **Note:** Deleting the minikube cluster will remove all applications, namespaces, and persistent data associated with that cluster.
-
----
-
-## Analysing a Legacy Java Application with Konveyor
-
-This section demonstrates how to analyse a legacy Java application using Konveyor (and MTA), following the ["Let's Get Started with Analysis Module"](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application) guideline.  
-_Note: In the latest Konveyor UI, analysis results may appear under the **Issues** tab rather than a dedicated Reports section._
-
-### Step 1: Create an Application Entry in Konveyor
-
-1. In the Konveyor UI, go to the **Analysis** tab and click **Create Application**.
-2. Fill in the application details:
-    - **Name:** `customer-tomcat`
-3. Expand the **Source Code** section and enter the following:
-    - **Repository Type:** `Git`
-    - **Source Repository:** `https://github.com/konveyor/example-applications`
-    - **Branch:** `main`
-    - **Root path:** `/example-1/`
-4. Click the **Create** button.
-
-### Step 2: Run an Analysis
-
-1. In the Konveyor UI, select the `customer-tomcat` application you just created.
-2. Click **Analyse** (or **Create Analysis**).
-3. Choose relevant targets (e.g., **Containerisation**, **Kubernetes**).
-4. (Optional) Select migration rules if applicable.
-5. Click **Run Analysis**.
-6. Monitor progress in the UI or with:
-    ```bash
-    kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
-    ```
-
-### Step 3: Review Analysis Results
-
-- After the analysis completes, go to your application's **Issues** tab in the Konveyor UI (not the Reports section).
-- Review the list of issues and recommendations.
-
-#### Example Issues and How to Address Them
-
-##### 1. File System - Java IO
-
-**Issue:**  
-The application reads configuration from a file inside the container, e.g.:
-```java
-try (InputStream inputStream = new FileInputStream("/opt/config/persistence.properties")) {
-    properties.load(inputStream);
-}
-```
-**Why it's a problem:**  
-- Container file systems are ephemeral; files may be lost on restart or redeploy.
-- Hardcoded file paths make configuration updates difficult and less portable.
-
-**How to modernise:**  
-How you address this depends on the function of the file in local storage:
-
-- **Logging:** Log to standard output and use a centralised log collector to analyse the logs.
-- **Caching:** Use a cache backing service (such as Redis or Memcached) instead of writing cache data to the local file system.
-- **Configuration:** Store configuration settings in environment variables or mount them into the container using Kubernetes ConfigMaps, so they can be updated without code changes.
-- **Data storage:** Use a database backing service for relational data or a persistent data storage system, rather than writing to local files.
-- **Temporary data storage:** Use the file system of a running container only for brief, single-transaction caches or temporary files that can be safely lost if the container restarts.
-- Use **environment variables** for configuration, or mount configuration files using **Kubernetes ConfigMaps**.
-
-**Example (ConfigMap as file):**
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-config
-data:
-  persistence.properties: |
-    key1=value1
-    key2=value2
----
-apiVersion: apps/v1
-kind: Deployment
-spec:
-  template:
-    spec:
-      containers:
-      - name: your-app
-        volumeMounts:
-        - name: config-volume
-          mountPath: /opt/config
-      volumes:
-      - name: config-volume
-        configMap:
-          name: app-config
-```
-Or, refactor your Java code to read from environment variables.
-
----
-
-##### 2. Hardcoded IP Address
-
-**Issue:**  
-The application uses a hardcoded IP address in its configuration, e.g.:
-```properties
-jdbc.url=jdbc:oracle:thin:@169.60.225.216:1521/XEPDB1
-```
-**Why it's a problem:**  
-- Hardcoded IPs make the app less portable and harder to move between environments.
-- If the database IP changes, you must rebuild or manually edit your config.
-
-**How to modernise:**  
-- Use **environment variables** or **Kubernetes ConfigMaps/Secrets** for connection info.
-- Reference your database by **Kubernetes Service DNS name** instead of an IP.
-
-**Example:**
-```properties
-jdbc.url=jdbc:oracle:thin:@oracle-db-service:1521/XEPDB1
-```
-Where `oracle-db-service` is the name of your Kubernetes Service for the database.
-
----
-
-### Summary Table
-
-| Issue                | Why It’s a Problem                | Best Practice                                   |
-|----------------------|-----------------------------------|-------------------------------------------------|
-| File system Java IO  | Ephemeral storage, hard to update | Use env vars or ConfigMaps for configuration    |
-| Hardcoded IP Address | Not portable, hard to maintain    | Use env vars/ConfigMaps, reference by DNS name  |
-
----
-
-## Next Steps After Application Analysis
-
-The following diagram illustrates the workflow after application analysis:
-
-![What to do after an application is reviewed and analysed by Konveyor](images/modernisation-overview.png)
-*Figure: What to do after an application is reviewed and analysed by Konveyor*
-
----
-
-### Diagram Overview
-
-The diagram presents a well-structured workflow for modernising legacy applications using the Migration Toolkit for Applications ([MTA](https://developers.redhat.com/products/mta/overview)) and Konveyor Hub, followed by containerisation and deployment via CI/CD pipelines. It effectively maps out the journey from legacy code to cloud-native deployment.
-
-#### Key Components & Flow
-
-**1. Migration Toolkit for Applications (MTA)**
-- **Purpose:** Analyses legacy code, assesses modernisation effort, and generates actionable reports.
-- **Strengths:**
-  - Clear emphasis on automated code transformation.
-  - Highlights dependency analysis and configuration updates.
-- *Suggestion:* Consider adding examples of supported legacy platforms ([Java EE](https://www.oracle.com/java/technologies/java-ee-glance.html), [.NET](https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet)) for clarity.
-
-**2. Konveyor Hub**
-- **Structure:** Centralised with six spokes—Assessment, Planning, Analysis & Transformation, Reports, Integration & Automation, Execution.
-- **Strengths:**
-  - Nicely encapsulates the lifecycle of modernisation.
-  - Shows how MTA integrates into a broader ecosystem.
-- *Suggestion:* A brief note on how Konveyor Hub interfaces with external tools (e.g., IDEs or CI platforms) could enhance understanding.
-
-**3. Typical Workflow**
-- **Steps:** Run MTA → Review reports → Apply changes → Refactor → Containerise.
-- **Strengths:** Logical and easy to follow.
-- *Suggestion:* You might want to visually differentiate manual vs. automated steps for clarity.
-
-**4. Containerisation & CI/CD**
-- **Tools Used:** Build Manager, Git Store, Automation Tools, Tekton, ArgoCD.
-- **Strengths:**
-  - Shows end-to-end pipeline from code to deployment.
-  - Includes both CI (build/push) and CD (deploy via ArgoCD).
-- *Suggestion:* Consider adding security scanning or testing stages (e.g., [Trivy](https://aquasecurity.github.io/trivy/), [SonarQube](https://www.sonarqube.org/)) to reflect best practices.
-
-**5. Namespaces: Retail & ArgoCD**
-- **Retail Namespace:**
-  - Illustrates a microservices architecture with frontend, gateway API, and multiple DBs (Oracle, PgSQL).
-- **ArgoCD Namespace:**
-  - Demonstrates automated deployment.
-- **Strengths:** Good use of real-world examples.
-- *Suggestion:* Label the communication flow between services (e.g., REST, gRPC) for completeness.
 
 ---
 
