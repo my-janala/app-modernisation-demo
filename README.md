@@ -159,7 +159,7 @@ _Note: In the latest Konveyor UI, analysis results may appear under the **Issues
     - **Repository Type:** `Git`
     - **Source Repository:** `https://github.com/konveyor/example-applications`
     - **Branch:** `main`
-    - **Root path:** `/example-1/`
+    - **Root path:** `example-1/`
 4. Click the **Create** button.
 
 ### Step 2: Run an Analysis
@@ -360,9 +360,10 @@ minikube addons enable ingress
 minikube addons enable olm
 ```
 
-If the OLM addon is not available or fails, install OLM manually:
+If the OLM addon is not available or fails, install OLM manually by applying the CRDs first and then the OLM components:
 ```bash
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/install.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/crds.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/olm.yaml
 ```
 
 ---
@@ -474,8 +475,6 @@ Open your browser and navigate to [http://localhost:8080](http://localhost:8080)
 
 ### Security Best Practices
 - [Trivy - Vulnerability Scanner](https://aquasecurity.github.io/trivy/)
-
-
 
 
 
