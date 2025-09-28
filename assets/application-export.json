@@ -1,0 +1,34 @@
+{
+  "name": "customer-tomcat",
+  "description": "Sample export representing the legacy Tomcat app analysed in this demo.",
+  "businessService": null,
+  "tags": [
+    {
+      "id": 1,
+      "name": "tomcat",
+      "type": {
+        "id": 1,
+        "name": "Runtime"
+      }
+    },
+    {
+      "id": 2,
+      "name": "legacy",
+      "type": {
+        "id": 2,
+        "name": "Assessment"
+      }
+    }
+  ],
+  "repository": {
+    "kind": "git",
+    "url": "https://github.com/konveyor/example-applications",
+    "branch": "main",
+    "path": "example-1/"
+  },
+  "identities": [],
+  "facts": {
+    "konveyor.analysis.targets": ["containerization", "kubernetes"],
+    "konveyor.priority": "medium"
+  }
+}
