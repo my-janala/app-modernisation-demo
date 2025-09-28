@@ -321,6 +321,23 @@ The diagram presents a well-structured workflow for modernising legacy applicati
 
 _Follow these steps to set up Konveyor on minikube for application modernisation._
 
+### Automated Setup (Makefile)
+
+This repository includes a `Makefile` that orchestrates the full local demo lifecycle:
+
+```bash
+# Provision Minikube, OLM, and Konveyor (profile defaults to "konveyor-demo")
+make setup
+
+# (Optional) expose the Konveyor UI on http://localhost:8080
+make port-forward
+
+# Remove Konveyor resources and delete the Minikube profile
+make teardown
+```
+
+Customise resources by supplying variables, for example `make CPUS=6 MEMORY=12288 setup`. The targets assume `kubectl` is configured to talk to the Minikube profile (`--context konveyor-demo` by default).
+
 ### Prerequisites
 
 - **Docker**: For building and running containers  
@@ -475,7 +492,6 @@ Open your browser and navigate to [http://localhost:8080](http://localhost:8080)
 
 ### Security Best Practices
 - [Trivy - Vulnerability Scanner](https://aquasecurity.github.io/trivy/)
-
 
 
 
