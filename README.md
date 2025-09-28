@@ -30,6 +30,7 @@ After setup, open the Analysis Workflow to upload `assets/application-export.jso
 - `assets/` – sample Konveyor export plus Kubernetes templates for the customer application.
 - `images/` – supporting diagrams referenced from the documentation.
 - `Makefile` – automation to create/destroy the local Konveyor environment.
+- Community files: see [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [SECURITY.md](SECURITY.md), and the issue/PR templates under `.github/`.
 
 ## References
 
