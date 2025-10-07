@@ -5,8 +5,8 @@
 
 set -e
 
-SLIDES_FILE="SLIDES.md"
-OUTPUT_FILE="App_Modernization_Demo_Slides"
+SLIDES_FILE="SLIDES_VISUAL.md"
+OUTPUT_FILE="App_Modernization_Demo_Slides_Visual"
 
 echo "PowerPoint Conversion Script for App Modernization Demo"
 echo "======================================================="
