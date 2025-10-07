@@ -1,5 +1,41 @@
 # .gitignore for app-modernisation-demo
+# Application Modernization Demo Repository
+#
+# This repository contains presentation materials and technical guides for
+# demonstrating application modernization with Konveyor. Final presentation 
+# files are tracked in git, while development/temporary files are ignored.
 
+# === FINAL PRESENTATION FILES (TRACKED IN REPO) ===
+# TRACKED: SLIDES_MODERNIZATION.md - authoritative presentation source
+# TRACKED: App_Modernization_Business_Slides.pptx - final PowerPoint
+# TRACKED: assets/logos/ - official Konveyor branding
+# TRACKED: PRESENTATION_GUIDE.md, DEMO_SCRIPT.md, SPEAKER_NOTES.md
+
+# === DEVELOPMENT & TEMPORARY FILES ===
+# Temporary files
+*.tmp
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+*~
+nohup.out
+.cache/
+
+# Draft/backup presentation files
+*_draft.md
+*_backup.md
+*_old.*
+SLIDES_*.md.bak
+*.pptx.bak
+
+# Generated files during development
+.history/
+tmp/
+temp/
+
+# === PROGRAMMING LANGUAGES ===
 # Python
 __pycache__/
 *.py[cod]
@@ -16,15 +52,6 @@ build/
 pip-wheel-metadata/
 .pytest_cache/
 .coverage
-
-# Go
-bin/
-pkg/
-*.exe
-*.test
-*.out
-*.mod
-*.sum
 
 # Java
 *.class
@@ -46,6 +73,15 @@ dependency-reduced-pom.xml
 .gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
+
+# Go
+bin/
+pkg/
+*.exe
+*.test
+*.out
+*.mod
+*.sum
 
 # Node.js
 node_modules/
@@ -89,11 +125,11 @@ ehthumbs.db
 Icon?
 Desktop.ini
 
-# Logs
+# === LOGS & DATABASES ===
+# Application logs
 *.log
 logs/
 *.log.*
-nohup.out
 
 # SQL and DB
 *.db
@@ -101,7 +137,8 @@ nohup.out
 *.sql
 .h2/
 
-# Archives and compressed files
+# === ARCHIVES (Exclude from repo) ===
+# Compressed files
 *.zip
 *.tar.gz
 *.tgz
@@ -109,6 +146,10 @@ nohup.out
 *.gz
 *.rar
 *.7z
+
+# Presentation export archives
+presentation_backup_*.zip
+demo_files_*.tar.gz
 
 # Kubernetes and Container files
 *.kube/
@@ -118,7 +159,8 @@ kubeconfig
 .dockerignore
 kubectl-debug/
 
-# Konveyor specific
+# === KONVEYOR & APPLICATION MODERNIZATION ===
+# Konveyor runtime data
 .konveyor/
 .tackle/
 mta-*/
@@ -126,6 +168,12 @@ konveyor-*/
 .kai-cache/
 .kai-reports/
 tackle-reports/
+
+# Local demo data (exclude from repo)
+demo-applications/
+sample-apps-backup/
+assessment-results-*/
+migration-reports-*/
 
 # Application server specific
 tomcat*/
@@ -142,48 +190,60 @@ tomcat*/
 *.pb
 .ipynb_checkpoints/
 
-# Misc
-*.tmp
-*.bak
-*.old
-*.orig
-.cache/
+# === PRESENTATION DEVELOPMENT ===
+# Presentation development files
+slides_working_*.md
+presentation_notes_*.md
+speaker_backup_*.md
+demo_script_v*.md
+
+# PowerPoint templates and backups
+template_*.pptx
+*_template.pptx
+*_BACKUP_*.pptx
+
+# === SECURITY & CREDENTIALS ===
+# Environment and secrets
 .env.*
 !.env.example
 .secrets/
-*.pid
-*.seed
-tmp/
-temp/
-.history/
-.terraform/
+*.pem
+*.key
+*.crt
+*.csr
 
+# === TEST & BUILD OUTPUT ===
 # Test output
 test-output/
 coverage/
 coverage-final.json
 .nyc_output/
 
+# === INFRASTRUCTURE ===
 # Docker
+docker-compose.override.yml
 *.pid
 *.seed
-docker-compose.override.yml
 
-# Kubernetes
+# Kubernetes local config
 *.kube/
 *.minikube/
+kubeconfig.local
 
-# VS Code settings
-.vscode/
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# === MISCELLANEOUS ===
+# Process files
+*.pid
+*.seed
+
+# Editor files
+*.sublime
 .history/
 
-# Mac system files
+# System files
 .AppleDouble
 .LSOverride
-
-# Others
-*.pem
-*.key
-*.crt
-*.csr
-*.sublime
