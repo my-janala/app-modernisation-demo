@@ -92,16 +92,26 @@ cd app-modernisation-demo
 # Provision Minikube + Konveyor (15-20 minutes first time)
 make setup
 
-# Forward Konveyor UI to http://localhost:8080
+# Confirm the environment is healthy
+make verify
+
+# Forward Konveyor UI to http://localhost:8080 (backgrounds tunnel, logs to /tmp/konveyor-port-forward.log)
 make port-forward
+```
+
+If the Minikube OLM addon is unhealthy on your workstation, rerun the setup with pinned manifests:
+
+```bash
+make INSTALL_OLM_MANUALLY=true setup
 ```
 
 ### Demo Execution
 
-1. **Open Konveyor UI:** Navigate to <http://localhost:8080>
-2. **Import Application:** Upload `assets/application-export.json` or create manually
-3. **Run Analysis:** Follow the [Analysis Workflow](docs/analysis-workflow.md)  
-4. **Review Results:** Examine the Issues tab and modernisation recommendations
+1. **Verify components (optional repeat):** `make verify` or `kubectl --context konveyor-demo get pods -n my-konveyor-operator`
+2. **Open Konveyor UI:** After the background `make port-forward`, browse to <http://localhost:8080>. Check `/tmp/konveyor-port-forward.log` for tunnel logs; stop it later with `pkill -f 'port-forward svc/tackle-ui'` or `make teardown`.
+3. **Import Application:** Upload `assets/application-export.json` or create manually
+4. **Run Analysis:** Follow the [Analysis Workflow](docs/analysis-workflow.md) and optionally watch progress with `kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f`  
+5. **Review Results:** Examine the Issues tab and modernisation recommendations
 
 ### Cleanup
 
