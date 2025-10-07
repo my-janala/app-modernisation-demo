@@ -17,6 +17,21 @@ Transform your understanding of application modernisation through a complete bus
 - **Hands-on demonstration** with real Konveyor assessment workflow
 - **Automated environment setup** for consistent demos
 
+## About the Author
+
+**Mezbaur Rahman** is a Platform Engineer at CIS Capgemini, specialising in cloud-native technologies, application modernisation, and enterprise transformation initiatives. With extensive experience in containerisation, Kubernetes, and modern DevOps practices, Mezba helps organisations navigate their journey from legacy systems to scalable, cloud-native architectures.
+
+**Connect with Mezba:**
+- 🔗 **LinkedIn:** [linkedin.com/in/mezba](https://www.linkedin.com/in/mezba/)
+- 📝 **Technical Blog:** [medium.com/@mezba](https://medium.com/@mezba)
+- 💼 **Professional Focus:** Platform Engineering, Application Modernisation, Cloud-Native Architecture
+
+**Expertise Areas:**
+- Enterprise application modernisation strategies
+- Kubernetes and container orchestration
+- Platform engineering and DevOps transformation  
+- Cloud-native architecture design and implementation
+
 ## Presentation Materials
 
 Ready-to-use presentation assets for technical meetups, executive briefings, and customer demonstrations.

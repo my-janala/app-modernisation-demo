@@ -474,13 +474,20 @@ graph TB
 
 ### Connect & Learn More
 
-**Mezba Rahman** - mezba.rahman@capgemini.com  
-**Platform Engineering, CIS Capgemini**
+**Mezba Rahman**  
+Platform Engineer | CIS Capgemini  
+📧 mezba.rahman@capgemini.com
+
+### Connect & Follow
+
+🔗 **LinkedIn:** [linkedin.com/in/mezba](https://www.linkedin.com/in/mezba/)  
+📝 **Technical Blog:** [medium.com/@mezba](https://medium.com/@mezba)  
+💼 **Expertise:** Platform Engineering, App Modernisation, Cloud-Native Architecture
 
 ### Resources
 
 **Konveyor Project**: https://konveyor.io  
-**Modernization Guides**: https://konveyor.io/docs  
+**Modernisation Guides**: https://konveyor.io/docs  
 **This Demo**: github.com/my-janala/app-modernisation-demo
 
 ![CNCF Sandbox](assets/logos/cncf_icon.png) **CNCF Sandbox Project**
