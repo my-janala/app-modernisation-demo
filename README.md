@@ -1,4 +1,4 @@
-# Application Modernisati| **[SLIDES_MODERNISATION.md](SLIDES_MODERNISATION.md)** | Business-focused modernisation journey presentation (27 slides) | Markdown |n Demo
+# Application Modernisation Demo
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Konveyor](https://img.shields.io/badge/Powered%20by-Konveyor-orange.svg)](https://konveyor.io/)
@@ -38,8 +38,8 @@ Ready-to-use presentation assets for technical meetups, executive briefings, and
 
 | File | Description | Format |
 |------|-------------|---------|
-| **[SLIDES_MODERNIZATION.md](SLIDES_MODERNIZATION.md)** | Business-focused modernisation journey presentation (27 slides) | Markdown |
-| **[App_Modernisation_Business_Slides.pptx](App_Modernisation_Business_Slides.pptx)** | Professional PowerPoint presentation | PPTX (396KB) |
+| **[SLIDES_MODERNISATION.md](SLIDES_MODERNISATION.md)** | Business-focused modernisation journey presentation (~15 slides) | Markdown |
+| **[App_Modernisation_Business_Slides.pptx](App_Modernisation_Business_Slides.pptx)** | PowerPoint version of the modernisation journey (for executive/technical audiences) | PPTX |
 | **[PRESENTATION_GUIDE.md](PRESENTATION_GUIDE.md)** | Complete presentation guide with timing and setup | Markdown |
 | **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** | Step-by-step Konveyor demonstration script | Markdown |
 | **[SPEAKER_NOTES.md](SPEAKER_NOTES.md)** | Detailed speaker notes and Q&A preparation | Markdown |
