@@ -15,14 +15,14 @@
 
 ## Opening Hook Options
 
-### For Technical Audiences
-*"How many of you have spent weeks analyzing a legacy application, only to discover critical blockers halfway through migration? Today I'll show you how to identify those blockers in minutes, not months."*
+### For Cloud Native Communities
+*"How many of you are helping organizations move to Kubernetes but struggle with legacy application assessment? Today I'll show you how Konveyor can identify containerization blockers in minutes, not months."*
 
-### For Business Audiences  
-*"Every day we delay modernization, we're choosing technical debt over technical investment. What if I told you we could assess your entire application portfolio in the time it used to take to analyze a single application?"*
+### For Platform Engineers
+*"Every migration project starts with the same question: which applications are cloud-ready? What if I told you we could assess entire portfolios automatically and get AI-powered modernization recommendations?"*
 
-### For Mixed Audiences
-*"Legacy applications represent millions of dollars in business logic and years of development effort. The question isn't whether to modernize - it's how to modernize safely and efficiently."*
+### For Kubernetes Practitioners  
+*"Legacy applications aren't the enemy of cloud-native - they're the foundation. The question isn't whether to modernize legacy apps for Kubernetes, it's how to do it safely and efficiently with the right tools."*
 
 ---
 
@@ -44,23 +44,23 @@
 
 ## Audience-Specific Talking Points
 
-### For CTOs and Technical Leadership
+### For Cloud Native Community Members
 
 **Pain Points to Address:**
-- Risk management in modernization initiatives
-- Resource allocation and timeline predictability
-- Technical debt quantification
-- ROI measurement challenges
+- Manual assessment bottlenecks in Kubernetes migrations
+- Inconsistent containerization readiness evaluation
+- Legacy application complexity and unknown dependencies
+- Time-consuming modernization planning processes
 
 **Key Messages:**
-- *"Konveyor provides the technical due diligence your board expects"*
-- *"Transform modernization from art to science with data-driven insights"*
-- *"Reduce project risk with comprehensive automated assessment"*
+- *"Konveyor automates the tedious assessment work so you can focus on architecture"*
+- *"Transform legacy application analysis from weeks to hours with proven patterns"*
+- *"Get Kubernetes-specific insights and containerization recommendations instantly"*
 
 **Questions to Ask:**
-- "What's your biggest concern when planning modernization initiatives?"
-- "How do you currently assess technical debt across your portfolio?"
-- "What would change if you could predict migration complexity accurately?"
+- "How do you currently assess applications for Kubernetes readiness?"
+- "What's your biggest challenge when helping clients move to cloud-native?"
+- "How much time do you spend on manual code analysis before containerization?"
 
 ### For Architects and Senior Engineers
 

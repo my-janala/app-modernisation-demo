@@ -4,33 +4,33 @@
 **App Modernization with Konveyor**
 *Automated Assessment for Legacy Applications*
 
-- Presenter: [Your Name]
-- Date: [Date]
-- Audience: [Technical Teams / Management / Mixed]
+- Presenter: Mezba Rahman, Platform Engineer, CIS Capgemini
+- Date: 10th October 2025, 2:00 PM
+- Audience: Cloud Native And Kubernetes Virtual Meetup
 
 ---
 
 ## Slide 2: Agenda
 **Today's Journey**
 
-1. **The Modernization Challenge** (8 min)
-2. **Konveyor Solution Overview** (7 min)  
-3. **Live Demo** (15-20 min)
-4. **Results & Insights** (10 min)
-5. **Next Steps & Q&A** (10 min)
+1. **The Modernization Challenge** (3 min)
+2. **Konveyor Solution Overview** (4 min)  
+3. **Live Demo** (15-18 min)
+4. **Results & Key Insights** (3 min)
+5. **Q&A & Resources** (5 min)
 
 ---
 
 ## Slide 3: Opening Question
-**How many of you are managing applications older than 5 years?**
+**How many of you help organizations migrate legacy apps to Kubernetes?**
 
-*Show of hands*
+*Chat responses welcome*
 
-**What's your biggest pain point with legacy systems?**
-- Performance limitations
-- Security vulnerabilities  
-- Maintenance costs
-- Modernization risks
+**What's your biggest challenge with legacy-to-cloud migrations?**
+- Unknown application dependencies
+- Containerization complexity
+- Time-consuming manual assessment
+- Migration risk and planning
 
 ---
 
@@ -372,14 +372,14 @@ stage('Modernization Assessment') {
 **Questions & Discussion**
 
 **Contact Information:**
-- Email: [your.email@company.com]
-- LinkedIn: [your-linkedin-profile]
-- GitHub: [your-github-username]
+- Email: mezba.rahman@capgemini.com
+- LinkedIn: linkedin.com/in/mezba-rahman
+- GitHub: github.com/mezbaurrahman
 
 **Key Takeaway:**
-*Modernization doesn't have to be risky when it's data-driven. Konveyor eliminates the guesswork and accelerates your cloud journey.*
+*Legacy-to-Kubernetes migration doesn't have to be risky when it's automated. Konveyor eliminates the guesswork and accelerates cloud-native transformation.*
 
-**Let's discuss your specific modernization challenges!**
+**Questions? Let's discuss in the chat or connect afterwards!**
 
 ---
 

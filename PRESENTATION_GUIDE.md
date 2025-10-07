@@ -2,9 +2,10 @@
 
 ## Presentation Overview
 
-**Duration:** 45-60 minutes (30 min presentation + 15-30 min demo)  
-**Audience:** Technical teams, architects, platform engineers, management  
-**Objective:** Demonstrate practical application modernization using Konveyor/MTA
+**Duration:** 25-30 minutes (10 min intro + 15-20 min demo)  
+**Audience:** Cloud Native And Kubernetes Virtual Meetup (Technical community)
+**Event:** Virtual Meetup - 10th October 2025, 2:00 PM
+**Objective:** Demonstrate Konveyor for automated legacy application assessment and Kubernetes migration
 
 ---
 
@@ -220,11 +221,11 @@ cat assets/deployment.yaml
 
 ## Key Messages & Talking Points
 
-### For Technical Audience:
-- "Konveyor reduces analysis time from weeks to hours"
-- "AI-powered recommendations based on thousands of real migrations"
-- "Open-source with enterprise support through Red Hat MTA"
-- "Integrates with existing CI/CD pipelines"
+### For Cloud Native Community:
+- "Konveyor accelerates cloud-native transformation with automated assessment"
+- "AI-powered recommendations based on thousands of real Kubernetes migrations"
+- "Open-source tool that integrates seamlessly with cloud-native CI/CD pipelines"
+- "Essential for enterprises moving to Kubernetes at scale"
 
 ### For Management:
 - "Reduces modernization risk through automated assessment"
@@ -327,10 +328,11 @@ kubectl logs job/<analyzer-job> -n my-konveyor-operator
 4. **Plan strategically** - Use findings to build modernization roadmap
 
 ### Resources to Share:
-- GitHub Repository: `github.com/my-janala/app-modernisation-demo`
-- Konveyor Website: `konveyor.io`
-- Red Hat MTA: `developers.redhat.com/products/mta`
-- Community Slack: `konveyor.slack.com`
+- This Demo Repository: `github.com/my-janala/app-modernisation-demo`
+- Konveyor Project: `konveyor.io`
+- Red Hat MTA Enterprise: `developers.redhat.com/products/mta`
+- Community: `konveyor.slack.com`
+- Presenter Contact: `mezba.rahman@capgemini.com`
 
 ---
 
