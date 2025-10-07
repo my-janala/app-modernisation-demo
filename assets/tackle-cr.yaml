@@ -1,0 +1,7 @@
+apiVersion: tackle.konveyor.io/v1alpha1
+kind: Tackle
+metadata:
+  name: tackle
+  namespace: my-konveyor-operator
+spec:
+  feature_auth_required: false

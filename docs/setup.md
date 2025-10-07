@@ -31,7 +31,7 @@ sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
 
 ## Automated Setup (Makefile)
 
-This repository provides a `Makefile` that automates the full lifecycle:
+This repository provides a `Makefile` that automates the full lifecycle. By default it relies on the Minikube `olm` addon, waits for the Konveyor operator to register its CRDs, and then creates the Tackle instance automatically:
 
 ```bash
 # Provision Minikube, OLM, and Konveyor (defaults to profile "konveyor-demo")
@@ -42,6 +42,12 @@ make port-forward
 
 # Remove Konveyor resources and delete the Minikube profile
 make teardown
+```
+
+If the Minikube addon fails to provide a healthy catalog, rerun the setup with manual OLM installation enabled:
+
+```bash
+make INSTALL_OLM_MANUALLY=true setup
 ```
 
 You can override resources with variables, for example:
@@ -62,11 +68,12 @@ minikube addons enable ingress
 minikube addons enable olm
 ```
 
-If the OLM addon is unavailable, install OLM manually by applying the CRDs first and then the components:
+If the OLM addon is unavailable—or you prefer to use the pinned manifests—disable it and apply the same release used by the automated flow:
 
 ```bash
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/crds.yaml
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/latest/download/olm.yaml
+minikube addons disable olm
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.25.0/crds.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.25.0/olm.yaml
 ```
 
 ### Install Konveyor Operator
@@ -156,7 +163,7 @@ tackle   78s   True
 ## Troubleshooting
 
 - **Pods Pending:** If pods remain in `Pending`, run `kubectl describe pod <name> -n my-konveyor-operator`. Usually the node lacks resources—increase Minikube resources (`make MEMORY=12288 CPUS=6 setup`) or reclaim space by deleting unused namespaces.
-- **OLM Catalog Image Pull Errors:** Failures mentioning `quay.io/operator-framework` typically indicate network or proxy issues. Re-run `make install-olm` after connectivity returns, or pre-pull images with `minikube image pull` for offline use.
+- **OLM Catalog Image Pull Errors:** Failures mentioning `quay.io/operator-framework` typically indicate network or proxy issues. Re-run `make INSTALL_OLM_MANUALLY=true setup` after connectivity returns (or apply the pinned manifests manually), or pre-pull images with `minikube image pull` for offline use.
 - **Analyzer Job Errors:** If analyses produce no results, list jobs with `kubectl get jobs -n my-konveyor-operator` and inspect logs using `kubectl logs job/<job-name> -n my-konveyor-operator --tail=100`. Confirm repository URL, branch, and root path values in the UI.
 - **Tackle CR Creation Hangs:** `kubectl apply` may finish before deployments exist. Run `make wait-konveyor` to wait for `tackle-operator`, `tackle-ui`, and `tackle-hub` deployments to become `Available`.
 - **General Diagnostics:** Use `kubectl logs <pod> -n my-konveyor-operator` and `kubectl get events -n my-konveyor-operator --sort-by=.lastTimestamp` to surface root causes. Refer to the [Konveyor documentation](https://konveyor.github.io/tackle2-operator/) for component-specific tips.
