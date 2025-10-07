@@ -1,13 +1,21 @@
-# app-modernisation-demo
+# Application Modernization Demo
 
-Modernisation demo for a legacy Tomcat application using Konveyor / Migration Toolkit for Applications (MTA). The repository bundles guides, runnable assets, and automation to provision Konveyor locally, analyse the sample application, and plan remediation.
+Complete application modernization demonstration showcasing business transformation from legacy systems to cloud-native architecture using Konveyor / Migration Toolkit for Applications (MTA). This repository includes presentation materials, technical guides, and automation for demonstrating AI-powered modernization assessment.
 
-## Quick Links
+## 🚀 Presentation Materials
 
-- [Setup Guide](docs/setup.md) – provision Minikube, install Konveyor, and troubleshoot common issues.
-- [Analysis Workflow](docs/analysis-workflow.md) – import/run the sample application analysis and interpret findings.
-- [Modernisation Playbook](docs/modernisation-playbook.md) – explore strategy context, Konveyor components, and next-step planning.
-- [Sample Assets](docs/setup.md#sample-assets) – ConfigMap/Secret/Deployment templates and application export for quick demos.
+- **[SLIDES_MODERNIZATION.md](SLIDES_MODERNIZATION.md)** – Business-focused presentation on application modernization journey (27 slides)
+- **[App_Modernization_Business_Slides.pptx](App_Modernization_Business_Slides.pptx)** – Ready-to-present PowerPoint version (396KB)
+- **[PRESENTATION_GUIDE.md](PRESENTATION_GUIDE.md)** – Complete presentation guide with timing and technical setup
+- **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** – Step-by-step demo script for Konveyor demonstration
+- **[SPEAKER_NOTES.md](SPEAKER_NOTES.md)** – Detailed speaker notes and Q&A preparation
+
+## 📚 Technical Guides
+
+- [Setup Guide](docs/setup.md) – provision Minikube, install Konveyor, and troubleshoot common issues
+- [Analysis Workflow](docs/analysis-workflow.md) – import/run the sample application analysis and interpret findings  
+- [Modernisation Playbook](docs/modernisation-playbook.md) – explore strategy context, Konveyor components, and next-step planning
+- [Sample Assets](docs/setup.md#sample-assets) – ConfigMap/Secret/Deployment templates and application export for quick demos
 
 ## Fast Start
 
@@ -24,13 +32,29 @@ make teardown
 
 After setup, open the Analysis Workflow to upload `assets/application-export.json` or create the application manually, then run an analysis and review the Issues tab.
 
-## Repository Layout
+## 📁 Repository Structure
 
-- `docs/` – detailed setup, analysis, and modernisation guides.
-- `assets/` – sample Konveyor export plus Kubernetes templates for the customer application.
-- `images/` – supporting diagrams referenced from the documentation.
-- `Makefile` – automation to create/destroy the local Konveyor environment.
-- Community files: see [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [SECURITY.md](SECURITY.md), and the issue/PR templates under `.github/`.
+```txt
+📁 Presentation Materials
+├── SLIDES_MODERNIZATION.md              # Business-focused presentation source
+├── App_Modernization_Business_Slides.pptx  # Final PowerPoint presentation  
+├── PRESENTATION_GUIDE.md                # Complete presentation guide
+├── DEMO_SCRIPT.md                       # Step-by-step Konveyor demo
+├── SPEAKER_NOTES.md                     # Speaker notes & Q&A prep
+├── TROUBLESHOOTING_GUIDE.md            # Technical troubleshooting
+└── convert_to_powerpoint.sh             # Automated PowerPoint generation
+
+📁 Technical Assets  
+├── docs/                               # Setup, analysis, and modernization guides
+├── assets/                            # Sample Konveyor exports & Kubernetes templates
+├── assets/logos/                      # Official Konveyor branding assets
+├── images/                           # Supporting diagrams and visuals
+└── Makefile                          # Automated local Konveyor environment
+
+📁 Community
+├── CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
+└── .github/                          # Issue and PR templates
+```
 
 ## References
 

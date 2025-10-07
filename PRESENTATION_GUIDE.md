@@ -2,10 +2,10 @@
 
 ## Presentation Overview
 
-**Duration:** 25-30 minutes (10 min intro + 15-20 min demo)  
+**Duration:** 25-30 minutes (15 min business story + 10-15 min Konveyor demo)  
 **Audience:** Cloud Native And Kubernetes Virtual Meetup (Technical community)
 **Event:** Virtual Meetup - 10th October 2025, 2:00 PM
-**Objective:** Demonstrate Konveyor for automated legacy application assessment and Kubernetes migration
+**Objective:** Present application modernization business transformation with Konveyor demonstration
 
 ---
 

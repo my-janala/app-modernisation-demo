@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # PowerPoint Conversion Script
-# Converts SLIDES.md to PowerPoint format using multiple methods
+# Converts SLIDES_MODERNIZATION.md to PowerPoint format using Pandoc
 
 set -e
 
-SLIDES_FILE="SLIDES_VISUAL.md"
-OUTPUT_FILE="App_Modernization_Demo_Slides_Visual"
+SLIDES_FILE="SLIDES_MODERNIZATION.md"
+OUTPUT_FILE="App_Modernization_Business_Slides"
 
 echo "PowerPoint Conversion Script for App Modernization Demo"
 echo "======================================================="
 
-# Check if SLIDES.md exists
+# Check if SLIDES_MODERNIZATION.md exists
 if [ ! -f "$SLIDES_FILE" ]; then
-    echo "Error: SLIDES.md not found in current directory"
+    echo "Error: SLIDES_MODERNIZATION.md not found in current directory"
     exit 1
 fi
 
