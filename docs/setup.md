@@ -37,12 +37,19 @@ This repository provides a `Makefile` that automates the full lifecycle. By defa
 # Provision Minikube, OLM, and Konveyor (defaults to profile "konveyor-demo")
 make setup
 
+# Confirm everything is ready
+make verify
+
 # (Optional) expose the Konveyor UI on http://localhost:8080
 make port-forward
+
+> `make port-forward` now backgrounds the process with `nohup`; check `/tmp/konveyor-port-forward.log` for details and use `pkill -f 'port-forward svc/tackle-ui'` to stop it when you’re done.
 
 # Remove Konveyor resources and delete the Minikube profile
 make teardown
 ```
+
+`make teardown` deletes the Tackle instance, removes the Konveyor namespace, and destroys the Minikube profile so the cluster returns to a clean slate.
 
 If the Minikube addon fails to provide a healthy catalog, rerun the setup with manual OLM installation enabled:
 
@@ -160,6 +167,18 @@ NAME     AGE   READY
 tackle   78s   True
 ```
 
+## Validate the Environment
+
+After `make setup`, run `make verify` to confirm the Tackle CRD, Tackle instance, and core deployments are healthy. You can also check manually:
+
+```bash
+kubectl --context konveyor-demo get crd tackles.tackle.konveyor.io
+kubectl --context konveyor-demo get pods -n my-konveyor-operator
+kubectl --context konveyor-demo get tackle -n my-konveyor-operator
+```
+
+Start the background port forward with `make port-forward` (logs land in `/tmp/konveyor-port-forward.log`) and open [http://localhost:8080](http://localhost:8080) to continue the demo, importing `assets/application-export.json` and running the analysis from the UI. Stop the forward later with `pkill -f 'port-forward svc/tackle-ui'` or by deleting the Minikube profile.
+
 ## Troubleshooting
 
 - **Pods Pending:** If pods remain in `Pending`, run `kubectl describe pod <name> -n my-konveyor-operator`. Usually the node lacks resources—increase Minikube resources (`make MEMORY=12288 CPUS=6 setup`) or reclaim space by deleting unused namespaces.
@@ -182,6 +201,13 @@ kubectl create namespace retail
 kubectl apply -n retail -f assets/secret.yaml
 kubectl apply -n retail -f assets/configmap.yaml
 kubectl apply -n retail -f assets/deployment.yaml
+kubectl get pods -n retail
 ```
 
-Adjust the image reference or database settings for your environment, and add a `Service`/`Ingress` for external access if required.
+Monitor an in-flight analysis from the CLI if you prefer terminal output:
+
+```bash
+kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+```
+
+Adjust the image reference or database settings for your environment, and add a `Service`/`Ingress` for external access if required. The sample deployment targets a public Quay image so no registry secret is needed; if you swap to a private registry, add an `imagePullSecrets` entry and create the corresponding secret with `kubectl create secret docker-registry`.

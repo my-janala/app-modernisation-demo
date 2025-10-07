@@ -52,5 +52,3 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 20
-      imagePullSecrets:
-        - name: registry-credentials
