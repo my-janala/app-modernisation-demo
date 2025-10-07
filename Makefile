@@ -14,7 +14,7 @@ OLM_VERSION ?= v0.25.0
 OLM_CRDS ?= https://github.com/operator-framework/operator-lifecycle-manager/releases/download/$(OLM_VERSION)/crds.yaml
 OLM_OLM ?= https://github.com/operator-framework/operator-lifecycle-manager/releases/download/$(OLM_VERSION)/olm.yaml
 
-.PHONY: setup minikube-start enable-addons install-olm install-konveyor wait-tackle-crd apply-tackle wait-konveyor port-forward teardown clean
+.PHONY: setup minikube-start enable-addons install-olm install-konveyor wait-tackle-crd apply-tackle wait-konveyor verify port-forward teardown clean
 
 setup: minikube-start enable-addons install-olm install-konveyor wait-tackle-crd apply-tackle wait-konveyor
 
@@ -63,10 +63,25 @@ wait-konveyor:
 		kubectl --context $(KCTX) -n $(NAMESPACE) wait --for=condition=Available deployment/$$dep --timeout=300s; \
 	done
 
+verify:
+	@echo "Checking Konveyor installation in namespace $(NAMESPACE)"
+	@kubectl --context $(KCTX) get crd tackles.tackle.konveyor.io >/dev/null 2>&1 || { echo "✗ Tackle CRD not found"; exit 1; }
+	@kubectl --context $(KCTX) -n $(NAMESPACE) get tackle/tackle >/dev/null 2>&1 || { echo "✗ Tackle instance not found"; exit 1; }
+	@for dep in tackle-operator tackle-ui tackle-hub; do \
+		status=$$(kubectl --context $(KCTX) -n $(NAMESPACE) get deployment/$$dep -o jsonpath='{.status.conditions[?(@.type=="Available")].status}' 2>/dev/null); \
+		if [ "$$status" != "True" ]; then \
+			echo "✗ deployment/$$dep is not Available"; \
+			exit 1; \
+		fi; \
+	done
+	@echo "✓ Konveyor environment is ready"
+
 port-forward:
-	kubectl --context $(KCTX) -n $(NAMESPACE) port-forward svc/tackle-ui 8080:8080
+	nohup kubectl --context $(KCTX) -n $(NAMESPACE) port-forward svc/tackle-ui 8080:8080 >/tmp/konveyor-port-forward.log 2>&1 &
+	@echo "Port forward is running in background (log: /tmp/konveyor-port-forward.log)"
 
 teardown:
+	-@kubectl --context $(KCTX) -n $(NAMESPACE) delete tackle --all 2>/dev/null || true
 	-@kubectl --context $(KCTX) delete -f $(OPERATOR_MANIFEST)
 	-@kubectl --context $(KCTX) delete namespace $(NAMESPACE)
 	minikube delete -p $(PROFILE)
