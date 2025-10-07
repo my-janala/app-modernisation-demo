@@ -127,14 +127,14 @@ kubectl logs -l app=tackle-ui -n my-konveyor-operator
 
 **Quick Fixes:**
 ```bash
-# Check analyzer jobs
+# Check analyser jobs
 kubectl get jobs -n my-konveyor-operator
 
-# View analyzer logs
-kubectl logs -l app=tackle-analyzer -n my-konveyor-operator
+# View analyser logs
+kubectl logs -l app=tackle-analyser -n my-konveyor-operator
 
 # Restart stuck analysis
-kubectl delete job -l app=tackle-analyzer -n my-konveyor-operator
+kubectl delete job -l app=tackle-analyser -n my-konveyor-operator
 # Then restart analysis in UI
 ```
 
@@ -193,7 +193,7 @@ kubectl run test-pod --image=alpine --rm -it -- wget -qO- https://github.com/kon
 3. **Keep the audience engaged**
    - "While this would normally take 5 minutes to set up..."
    - "The key insight here is..."
-   - Ask questions about their current modernization challenges
+   - Ask questions about their current modernisation challenges
 
 #### If partial functionality works:
 1. **Acknowledge what's working**
@@ -202,11 +202,11 @@ kubectl run test-pod --image=alpine --rm -it -- wget -qO- https://github.com/kon
 
 2. **Narrate missing pieces**
    - "If the analysis were running, we'd see..."
-   - "The logs would show the analyzer processing files"
+   - "The logs would show the analyser processing files"
 
 3. **Focus on outcomes**
    - Show the issues that would be found
-   - Explain the modernization recommendations
+   - Explain the modernisation recommendations
 
 ### Handling Skeptical Questions
 
@@ -214,7 +214,7 @@ kubectl run test-pod --image=alpine --rm -it -- wget -qO- https://github.com/kon
 **Response:**
 - "You're absolutely right - this is a simplified demo"
 - "In practice, enterprise applications have thousands of files"
-- "Konveyor scales to analyze applications with millions of lines of code"
+- "Konveyor scales to analyse applications with millions of lines of code"
 - "The same patterns apply, but the volume of findings is much larger"
 
 #### "What about custom frameworks and libraries?"
@@ -226,7 +226,7 @@ kubectl run test-pod --image=alpine --rm -it -- wget -qO- https://github.com/kon
 
 #### "How accurate are these recommendations?"
 **Response:**
-- "95%+ accuracy for common modernization patterns"
+- "95%+ accuracy for common modernisation patterns"
 - "False positives are rare but can be filtered"
 - "Human review is still essential for business logic decisions"
 - "Think of it as an expert assistant, not a replacement"
@@ -251,7 +251,7 @@ kubectl get pods -n my-konveyor-operator
 - Show additional Kubernetes assets
 - Demonstrate CLI tools
 - Take more audience questions
-- Show the modernization-playbook.md content
+- Show the modernisation-playbook.md content
 
 ## Backup Resources
 
@@ -316,8 +316,8 @@ watch kubectl top pods -n my-konveyor-operator
 ### Pivot Strategies
 1. **Technical deep-dive**: If UI fails, show code analysis manually
 2. **Strategic discussion**: Focus on business value and ROI
-3. **Interactive session**: Turn into Q&A about modernization challenges
-4. **Case study approach**: Discuss real-world modernization examples
+3. **Interactive session**: Turn into Q&A about modernisation challenges
+4. **Case study approach**: Discuss real-world modernisation examples
 
 ### Communication Phrases
 - "This gives us a perfect opportunity to discuss..."

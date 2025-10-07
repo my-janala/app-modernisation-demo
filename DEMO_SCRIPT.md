@@ -36,7 +36,7 @@ echo "=== Starting with clean environment ==="
 minikube status konveyor-demo 2>/dev/null || echo "✓ No existing cluster"
 
 # Phase 2: One-command setup
-echo "=== Setting up complete modernization platform ==="
+echo "=== Setting up complete modernisation platform ==="
 time make setup
 
 # Expected output to highlight:
@@ -122,9 +122,9 @@ Root Path: example-1/
 ```bash
 # Show analysis in progress
 kubectl get jobs -n my-konveyor-operator
-kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+kubectl logs -l app=tackle-analyser -n my-konveyor-operator -f
 
-# Expected: See analyzer processing files
+# Expected: See analyser processing files
 ```
 
 ### 4. Results Review (5-7 minutes)
@@ -175,7 +175,7 @@ cat assets/deployment.yaml
 - Environment variable injection
 - Separation of config and secrets
 - Kubernetes-native service discovery
-- Proper labeling and namespace organization
+- Proper labeling and namespace organisation
 
 ## Quick Commands for Smooth Demo
 
@@ -192,7 +192,7 @@ make setup
 ### Skip Analysis (If Time Pressed)
 
 ```bash
-# Show pre-analyzed results by importing JSON
+# Show pre-analysed results by importing JSON
 # This bypasses the analysis wait time
 ```
 
@@ -202,7 +202,7 @@ make setup
 # Multiple terminals for better experience
 # Terminal 1: Main demo
 # Terminal 2: Live logs
-kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+kubectl logs -l app=tackle-analyser -n my-konveyor-operator -f
 
 # Terminal 3: Resource monitoring
 watch kubectl get pods -n my-konveyor-operator
@@ -280,7 +280,7 @@ kubectl get pods -n my-konveyor-operator | grep -E "NAME|Running"
 
 ```bash
 # If analysis hangs
-kubectl delete job -l app=tackle-analyzer -n my-konveyor-operator
+kubectl delete job -l app=tackle-analyser -n my-konveyor-operator
 
 # If UI is unresponsive  
 kubectl delete pod -l app=tackle-ui -n my-konveyor-operator

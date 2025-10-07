@@ -5,7 +5,7 @@
 **Duration:** 25-30 minutes (15 min business story + 10-15 min Konveyor demo)  
 **Audience:** Cloud Native And Kubernetes Virtual Meetup (Technical community)
 **Event:** Virtual Meetup - 10th October 2025, 2:00 PM
-**Objective:** Present application modernization business transformation with Konveyor demonstration
+**Objective:** Present application modernisation business transformation with Konveyor demonstration
 
 ---
 
@@ -45,7 +45,7 @@ make teardown
 **Talking Points:**
 - 70% of enterprise workloads still run on traditional infrastructure
 - Modernization isn't about replacement - it's about evolution
-- Show the modernization overview diagram (`images/modernisation-overview.png`)
+- Show the modernisation overview diagram (`images/modernisation-overview.png`)
 
 **Audience Engagement:**
 - "How many of you are managing applications older than 5 years?"
@@ -55,7 +55,7 @@ make teardown
 **Key Message:** "Modernization requires assessment before action"
 
 **Content:**
-- The 6 R's of modernization (Retain, Retire, Rehost, Replatform, Refactor, Repurchase)
+- The 6 R's of modernisation (Retain, Retire, Rehost, Replatform, Refactor, Repurchase)
 - Why automated analysis matters
 - Common legacy application issues:
   - Hardcoded configurations
@@ -66,7 +66,7 @@ make teardown
 **Visual Aid:** Show examples from the analysis-workflow.md
 
 ### 3. Konveyor Solution Overview (7 minutes)
-**Key Message:** "Konveyor provides AI-powered automation for modernization"
+**Key Message:** "Konveyor provides AI-powered automation for modernisation"
 
 **Components to Highlight:**
 - **Tackle:** Assessment and planning
@@ -101,7 +101,7 @@ echo "Starting from zero - no Kubernetes cluster"
 minikube status konveyor-demo || echo "Clean environment confirmed"
 
 # One command setup
-echo "Setting up complete modernization environment..."
+echo "Setting up complete modernisation environment..."
 make setup
 ```
 
@@ -152,7 +152,7 @@ echo "Konveyor UI available at http://localhost:8080"
 
 ```bash
 # Show analysis progress in terminal
-kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+kubectl logs -l app=tackle-analyser -n my-konveyor-operator -f
 ```
 
 **In UI:**
@@ -228,13 +228,13 @@ cat assets/deployment.yaml
 - "Essential for enterprises moving to Kubernetes at scale"
 
 ### For Management:
-- "Reduces modernization risk through automated assessment"
+- "Reduces modernisation risk through automated assessment"
 - "Accelerates time-to-cloud by 60-80%"
 - "Provides clear ROI metrics and migration roadmaps"
 - "Minimizes downtime during transitions"
 
 ### For Architects:
-- "Supports incremental modernization strategies"
+- "Supports incremental modernisation strategies"
 - "Maintains architectural consistency across portfolios"
 - "Enables cloud-native patterns adoption"
 - "Provides technical debt visibility"
@@ -273,7 +273,7 @@ kubectl port-forward svc/tackle-ui 8080:8080 -n my-konveyor-operator
 **Analysis stuck:**
 ```bash
 kubectl get jobs -n my-konveyor-operator
-kubectl logs job/<analyzer-job> -n my-konveyor-operator
+kubectl logs job/<analyser-job> -n my-konveyor-operator
 # Show logs and explain the process
 ```
 
@@ -282,10 +282,10 @@ kubectl logs job/<analyzer-job> -n my-konveyor-operator
 ## Metrics to Highlight
 
 - **Setup Time:** < 10 minutes for complete environment
-- **Analysis Speed:** Hundreds of files analyzed in minutes
+- **Analysis Speed:** Hundreds of files analysed in minutes
 - **Issue Detection:** Automated identification of 50+ common patterns
-- **Accuracy:** 95%+ precision in identifying modernization blockers
-- **ROI:** 60-80% reduction in modernization planning time
+- **Accuracy:** 95%+ precision in identifying modernisation blockers
+- **ROI:** 60-80% reduction in modernisation planning time
 
 ---
 
@@ -310,7 +310,7 @@ kubectl logs job/<analyzer-job> -n my-konveyor-operator
 **"Cost and licensing?"**
 - Open-source Konveyor is free
 - Red Hat MTA provides enterprise support
-- ROI through faster modernization
+- ROI through faster modernisation
 
 **"What about security and compliance?"**
 - Built-in security rule detection
@@ -325,7 +325,7 @@ kubectl logs job/<analyzer-job> -n my-konveyor-operator
 1. **Try the demo yourself** - Repository provides complete setup
 2. **Join the community** - Konveyor Slack, GitHub discussions  
 3. **Start small** - Pilot with non-critical applications
-4. **Plan strategically** - Use findings to build modernization roadmap
+4. **Plan strategically** - Use findings to build modernisation roadmap
 
 ### Resources to Share:
 - This Demo Repository: `github.com/my-janala/app-modernisation-demo`
@@ -358,4 +358,4 @@ kubectl logs job/<analyzer-job> -n my-konveyor-operator
 
 ---
 
-*This guide ensures your presentation delivers maximum impact while demonstrating the real value of modern application modernization approaches.*
+*This guide ensures your presentation delivers maximum impact while demonstrating the real value of modern application modernisation approaches.*

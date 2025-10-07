@@ -5,15 +5,15 @@
 
 set -e
 
-SLIDES_FILE="SLIDES_MODERNIZATION.md"
-OUTPUT_FILE="App_Modernization_Business_Slides"
+SLIDES_FILE="SLIDES_MODERNISATION.md"
+OUTPUT_FILE="App_Modernisation_Business_Slides"
 
 echo "PowerPoint Conversion Script for App Modernization Demo"
 echo "======================================================="
 
-# Check if SLIDES_MODERNIZATION.md exists
+# Check if SLIDES_MODERNISATION.md exists
 if [ ! -f "$SLIDES_FILE" ]; then
-    echo "Error: SLIDES_MODERNIZATION.md not found in current directory"
+    echo "Error: SLIDES_MODERNISATION.md not found in current directory"
     exit 1
 fi
 

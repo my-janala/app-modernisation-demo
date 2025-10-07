@@ -21,7 +21,7 @@ Thanks for your interest in improving the app-modernisation demo! This document 
 
 ## Commit Messages
 
-- Use concise, present-tense messages, e.g. `docs: add troubleshooting for analyzer jobs`.
+- Use concise, present-tense messages, e.g. `docs: add troubleshooting for analyser jobs`.
 - Reference issues with `Fixes #<id>` where appropriate.
 
 ## Pull Requests

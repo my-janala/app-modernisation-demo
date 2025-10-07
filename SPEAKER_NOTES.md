@@ -3,7 +3,7 @@
 ## Core Message Framework
 
 ### Primary Value Proposition
-**"Konveyor transforms months of manual analysis into hours of automated assessment, enabling confident, data-driven modernization decisions."**
+**"Konveyor transforms months of manual analysis into hours of automated assessment, enabling confident, data-driven modernisation decisions."**
 
 ### Supporting Messages
 1. **Risk Reduction**: Automated analysis eliminates guesswork and human error
@@ -16,10 +16,10 @@
 ## Opening Hook Options
 
 ### For Cloud Native Communities
-*"How many of you are helping organizations move to Kubernetes but struggle with legacy application assessment? Today I'll show you how Konveyor can identify containerization blockers in minutes, not months."*
+*"How many of you are helping organisations move to Kubernetes but struggle with legacy application assessment? Today I'll show you how Konveyor can identify containerisation blockers in minutes, not months."*
 
 ### For Platform Engineers
-*"Every migration project starts with the same question: which applications are cloud-ready? What if I told you we could assess entire portfolios automatically and get AI-powered modernization recommendations?"*
+*"Every migration project starts with the same question: which applications are cloud-ready? What if I told you we could assess entire portfolios automatically and get AI-powered modernisation recommendations?"*
 
 ### For Kubernetes Practitioners  
 *"Legacy applications aren't the enemy of cloud-native - they're the foundation. The question isn't whether to modernize legacy apps for Kubernetes, it's how to do it safely and efficiently with the right tools."*
@@ -31,11 +31,11 @@
 ### Market Context
 - **70%** of enterprise workloads still run on traditional infrastructure
 - **$300B+** annual technical debt costs across Fortune 500 companies
-- **18 months** average timeline for large-scale modernization projects
-- **60%** of modernization projects face unexpected blockers
+- **18 months** average timeline for large-scale modernisation projects
+- **60%** of modernisation projects face unexpected blockers
 
 ### Konveyor Impact
-- **95%+** accuracy in identifying modernization issues
+- **95%+** accuracy in identifying modernisation issues
 - **80%** reduction in assessment timeline
 - **50%** fewer migration surprises and blockers
 - **3-5x** faster time-to-cloud adoption
@@ -48,19 +48,19 @@
 
 **Pain Points to Address:**
 - Manual assessment bottlenecks in Kubernetes migrations
-- Inconsistent containerization readiness evaluation
+- Inconsistent containerisation readiness evaluation
 - Legacy application complexity and unknown dependencies
-- Time-consuming modernization planning processes
+- Time-consuming modernisation planning processes
 
 **Key Messages:**
 - *"Konveyor automates the tedious assessment work so you can focus on architecture"*
 - *"Transform legacy application analysis from weeks to hours with proven patterns"*
-- *"Get Kubernetes-specific insights and containerization recommendations instantly"*
+- *"Get Kubernetes-specific insights and containerisation recommendations instantly"*
 
 **Questions to Ask:**
 - "How do you currently assess applications for Kubernetes readiness?"
 - "What's your biggest challenge when helping clients move to cloud-native?"
-- "How much time do you spend on manual code analysis before containerization?"
+- "How much time do you spend on manual code analysis before containerisation?"
 
 ### For Architects and Senior Engineers
 
@@ -86,13 +86,13 @@
 **Pain Points to Address:**
 - Container readiness assessment
 - Kubernetes migration complexity
-- Configuration management modernization
+- Configuration management modernisation
 - Service mesh and observability planning
 
 **Key Messages:**
 - *"Automate the repetitive analysis work so you can focus on architecture"*
 - *"Bridge the gap between legacy applications and cloud-native platforms"*
-- *"Standardize modernization approaches across development teams"*
+- *"Standardize modernisation approaches across development teams"*
 
 **Demo Focus:**
 - Kubernetes-specific issue detection
@@ -109,8 +109,8 @@
 - Development velocity constraints
 
 **Key Messages:**
-- *"Konveyor identifies the exact code changes needed for modernization"*
-- *"Reduce the unknowns in your modernization backlog"*
+- *"Konveyor identifies the exact code changes needed for modernisation"*
+- *"Reduce the unknowns in your modernisation backlog"*
 - *"Focus development effort on high-impact changes"*
 
 **Practical Examples:**
@@ -146,8 +146,8 @@
 4. **AI Enhancement**: Context-aware recommendations
 
 **Rule Categories:**
-- **Mandatory**: Blocking issues that prevent modernization
-- **Optional**: Improvement opportunities for optimization
+- **Mandatory**: Blocking issues that prevent modernisation
+- **Optional**: Improvement opportunities for optimisation
 - **Information**: Educational insights about current patterns
 
 ### Integration Capabilities
@@ -156,7 +156,7 @@
 ```bash
 # Example Jenkins pipeline step
 stage('Modernization Assessment') {
-    konveyor-cli analyze --app myapp --targets containerization,kubernetes
+    konveyor-cli analyse --app myapp --targets containerisation,kubernetes
 }
 ```
 
@@ -171,21 +171,21 @@ stage('Modernization Assessment') {
 
 ### Environment Setup (While commands run)
 
-*"What we're seeing here is the power of automation. With a single command, we're provisioning a complete modernization platform that would traditionally require days of manual setup. Minikube is creating our Kubernetes cluster, the Operator Lifecycle Manager is installing our operators, and Konveyor is deploying its full suite of analysis tools."*
+*"What we're seeing here is the power of automation. With a single command, we're provisioning a complete modernisation platform that would traditionally require days of manual setup. Minikube is creating our Kubernetes cluster, the Operator Lifecycle Manager is installing our operators, and Konveyor is deploying its full suite of analysis tools."*
 
 *"In enterprise environments, this same process works with existing Kubernetes clusters - OpenShift, AKS, EKS, or GKE. The beauty is consistency across environments."*
 
 ### UI Walkthrough
 
-*"Notice the enterprise-grade interface. This isn't just a developer tool - it's designed for portfolio management across hundreds or thousands of applications. You can see application groupings, assessment status, and progress tracking at the organization level."*
+*"Notice the enterprise-grade interface. This isn't just a developer tool - it's designed for portfolio management across hundreds or thousands of applications. You can see application groupings, assessment status, and progress tracking at the organisation level."*
 
-*"The tagging system here allows you to organize applications by business unit, technology stack, or modernization priority. This becomes crucial when managing large portfolios."*
+*"The tagging system here allows you to organize applications by business unit, technology stack, or modernisation priority. This becomes crucial when managing large portfolios."*
 
 ### Analysis Configuration  
 
 *"When we configure analysis targets, we're essentially asking Konveyor: 'What would it take to run this application in containers?' and 'What changes are needed for Kubernetes deployment?' The analysis engine will examine every file, every configuration, every dependency to answer these questions."*
 
-*"Behind the scenes, Konveyor is applying hundreds of rules developed from real-world migrations. These aren't theoretical patterns - they're based on actual enterprise modernization projects."*
+*"Behind the scenes, Konveyor is applying hundreds of rules developed from real-world migrations. These aren't theoretical patterns - they're based on actual enterprise modernisation projects."*
 
 ### Results Review
 
@@ -201,14 +201,14 @@ stage('Modernization Assessment') {
 
 **Response Framework:**
 1. **Acknowledge**: "Great question - static analysis is important"
-2. **Differentiate**: "Konveyor is modernization-specific, not general code quality"
+2. **Differentiate**: "Konveyor is modernisation-specific, not general code quality"
 3. **Evidence**: "It understands cloud-native patterns and migration blockers"
 4. **Value**: "Provides prescriptive remediation, not just problem identification"
 
 **Specific Points:**
 - Migration-focused rulesets vs. general code quality
 - AI-enhanced context understanding  
-- Kubernetes and containerization expertise
+- Kubernetes and containerisation expertise
 - Proven patterns from thousands of migrations
 
 ### "What about applications with custom frameworks?"
@@ -217,7 +217,7 @@ stage('Modernization Assessment') {
 1. **Validate**: "Absolutely - custom frameworks are common in enterprise"
 2. **Extensibility**: "Konveyor supports custom rule development"
 3. **AI Advantage**: "KAI learns from your specific patterns"
-4. **Community**: "Rule sharing across organizations"
+4. **Community**: "Rule sharing across organisations"
 
 ### "How do you handle false positives?"
 
@@ -236,7 +236,7 @@ stage('Modernization Assessment') {
 4. **Quantifiable**: "Measurable reduction in migration timeline"
 
 **Concrete Example:**
-*"If a senior architect spends 3 weeks analyzing an application manually, that's $15,000 in labor costs. Konveyor does the same analysis in 30 minutes for $50 in compute costs. Scale that across 100 applications, and the ROI is clear."*
+*"If a senior architect spends 3 weeks analysing an application manually, that's $15,000 in labor costs. Konveyor does the same analysis in 30 minutes for $50 in compute costs. Scale that across 100 applications, and the ROI is clear."*
 
 ---
 
@@ -248,10 +248,10 @@ stage('Modernization Assessment') {
 *"The repository link is in the chat. You can run this entire demo on your laptop in 20 minutes. I encourage you to try it with one of your own applications."*
 
 **For Strategic Planning:**  
-*"The question isn't whether your applications will need modernization - it's whether you'll modernize proactively or reactively. Konveyor gives you the data to make that choice confidently."*
+*"The question isn't whether your applications will need modernisation - it's whether you'll modernize proactively or reactively. Konveyor gives you the data to make that choice confidently."*
 
 **For Technical Adoption:**
-*"Start small. Pick one non-critical application and run the analysis. Use the findings to build your modernization playbook. Then scale that approach across your portfolio."*
+*"Start small. Pick one non-critical application and run the analysis. Use the findings to build your modernisation playbook. Then scale that approach across your portfolio."*
 
 ### Final Messages
 
@@ -259,10 +259,10 @@ stage('Modernization Assessment') {
 *"Modernization doesn't have to be risky when it's data-driven. Konveyor eliminates the guesswork."*
 
 **Competitive Advantage:**  
-*"While your competitors are still manually analyzing applications, you could be three steps ahead with automated insights."*
+*"While your competitors are still manually analysing applications, you could be three steps ahead with automated insights."*
 
 **Future-Proofing:**
-*"Today's legacy applications are tomorrow's technical debt. The organizations that modernize efficiently will have the agility to compete in digital markets."*
+*"Today's legacy applications are tomorrow's technical debt. The organisations that modernize efficiently will have the agility to compete in digital markets."*
 
 ---
 
@@ -277,9 +277,9 @@ stage('Modernization Assessment') {
 ### Continued Engagement
 1. **Pilot Program**: Offer to support initial assessment project
 2. **Training Sessions**: Technical deep-dive workshops  
-3. **Best Practices**: Sharing modernization patterns and strategies
-4. **Success Stories**: Case studies from similar organizations
+3. **Best Practices**: Sharing modernisation patterns and strategies
+4. **Success Stories**: Case studies from similar organisations
 
 ---
 
-*Remember: Your expertise and passion for modernization are your greatest assets. Use these notes as a foundation, but let your knowledge and experience drive the conversation.*
+*Remember: Your expertise and passion for modernisation are your greatest assets. Use these notes as a foundation, but let your knowledge and experience drive the conversation.*

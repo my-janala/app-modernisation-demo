@@ -1,4 +1,4 @@
-# Application Modernization Journey - From Legacy to Cloud Native
+# Application Modernisation Journey - From Legacy to Cloud Native
 
 *Using Konveyor to Accelerate Transformation*
 
@@ -8,7 +8,7 @@
 
 ![Konveyor Logo](assets/logos/konveyor_header.png)
 
-# Application Modernization
+# Application Modernisation
 ## From Monolith to Microservices
 
 **Mezba Rahman**  
@@ -25,7 +25,7 @@ Platform Engineer | CIS Capgemini
 graph TB
     A[Business Demands] --> B[Faster Time to Market]
     A --> C[Cloud Scalability]
-    A --> D[Cost Optimization]
+    A --> D[Cost Optimisation]
     
     E[Legacy Reality] --> F[Monolithic Apps]
     E --> G[Slow Releases]
@@ -63,9 +63,9 @@ CURRENT CHALLENGES:
 
 ---
 
-## Slide 4: Modernization Business Drivers
+## Slide 4: Modernisation Business Drivers
 
-### Why Modernize Now?
+### Why Modernise Now?
 
 ```mermaid
 mindmap
@@ -86,7 +86,7 @@ mindmap
 
 ---
 
-## Slide 5: The Modernization Spectrum
+## Slide 5: The Modernisation Spectrum
 
 ```mermaid
 graph LR
@@ -134,7 +134,7 @@ PROBLEMS:
 
 ![Konveyor Avatar](assets/logos/konveyor_avatar.png)
 
-### Meet Your Modernization Assistant
+### Meet Your Modernisation Assistant
 
 ```mermaid
 graph LR
@@ -148,7 +148,7 @@ graph LR
     B --> B4[Risk Assessment]
 ```
 
-**Konveyor: Open-source modernization platform**
+**Konveyor: Open-source modernisation platform**
 
 ---
 
@@ -288,7 +288,7 @@ graph LR
 - **Complexity**: Medium (typical enterprise app)
 - **Goal**: Kubernetes readiness assessment
 
-**Let's see AI-powered modernization in action!**
+**Let's see AI-powered modernisation in action!**
 
 ---
 
@@ -349,7 +349,7 @@ graph LR
     G[Total ROI] --> H[350% Return]
 ```
 
-**Typical modernization pays for itself in 6-8 months**
+**Typical modernisation pays for itself in 6-8 months**
 
 ---
 
@@ -386,7 +386,7 @@ RIGHT TOOLS & PLATFORMS
    └── AI-powered assessment
 
 MEASURE EVERYTHING
-   └── ROI tracking & optimization
+   └── ROI tracking & optimisation
 
 SKILLS DEVELOPMENT
    └── Cloud-native expertise
@@ -405,7 +405,7 @@ SKILLS DEVELOPMENT
    *Solution: Assess first, then choose path*
 
 **AVOID: Ignoring Data Strategy**  
-   *Solution: Database modernization plan*
+   *Solution: Database modernisation plan*
 
 **AVOID: Skipping Observability**  
    *Solution: Monitoring from day one*
@@ -462,7 +462,7 @@ graph TB
 - How to handle legacy dependencies?
 - What about data migration strategies?
 
-**Share your modernization experiences!**
+**Share your modernisation experiences!**
 
 ---
 

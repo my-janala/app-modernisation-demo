@@ -1,14 +1,14 @@
-# Application Modernization Demo
+# Application Modernisati| **[SLIDES_MODERNISATION.md](SLIDES_MODERNISATION.md)** | Business-focused modernisation journey presentation (27 slides) | Markdown |n Demo
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Konveyor](https://img.shields.io/badge/Powered%20by-Konveyor-orange.svg)](https://konveyor.io/)
 [![CNCF Sandbox](https://img.shields.io/badge/CNCF-Sandbox-purple.svg)](https://www.cncf.io/projects/)
 
-A comprehensive demonstration repository showcasing enterprise application modernization from legacy monoliths to cloud-native microservices. This project demonstrates the complete modernization journey using **Konveyor** (Migration Toolkit for Applications) with ready-to-use presentation materials, technical guides, and automated infrastructure setup.
+A comprehensive demonstration repository showcasing enterprise application modernisation from legacy monoliths to cloud-native microservices. This project demonstrates the complete modernisation journey using **Konveyor** (Migration Toolkit for Applications) with ready-to-use presentation materials, technical guides, and automated infrastructure setup.
 
 ## Overview
 
-Transform your understanding of application modernization through a complete business transformation story. This repository provides everything needed to demonstrate how AI-powered assessment tools accelerate the journey from legacy systems to modern, scalable, cloud-native architectures.
+Transform your understanding of application modernisation through a complete business transformation story. This repository provides everything needed to demonstrate how AI-powered assessment tools accelerate the journey from legacy systems to modern, scalable, cloud-native architectures.
 
 **Key Benefits:**
 
@@ -23,22 +23,22 @@ Ready-to-use presentation assets for technical meetups, executive briefings, and
 
 | File | Description | Format |
 |------|-------------|---------|
-| **[SLIDES_MODERNIZATION.md](SLIDES_MODERNIZATION.md)** | Business-focused modernization journey presentation (27 slides) | Markdown |
-| **[App_Modernization_Business_Slides.pptx](App_Modernization_Business_Slides.pptx)** | Professional PowerPoint presentation | PPTX (396KB) |
+| **[SLIDES_MODERNIZATION.md](SLIDES_MODERNIZATION.md)** | Business-focused modernisation journey presentation (27 slides) | Markdown |
+| **[App_Modernisation_Business_Slides.pptx](App_Modernisation_Business_Slides.pptx)** | Professional PowerPoint presentation | PPTX (396KB) |
 | **[PRESENTATION_GUIDE.md](PRESENTATION_GUIDE.md)** | Complete presentation guide with timing and setup | Markdown |
 | **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** | Step-by-step Konveyor demonstration script | Markdown |
 | **[SPEAKER_NOTES.md](SPEAKER_NOTES.md)** | Detailed speaker notes and Q&A preparation | Markdown |
 
 ### Presentation Themes
 
-- **Business Transformation:** ROI-focused modernization narrative  
+- **Business Transformation:** ROI-focused modernisation narrative  
 - **Technical Assessment:** AI-powered application analysis
 - **Live Demonstration:** Real-time Konveyor workflow
 - **Best Practices:** Success patterns and common pitfalls
 
 ## Technical Implementation
 
-Comprehensive technical documentation for setting up and running the modernization assessment demonstration.
+Comprehensive technical documentation for setting up and running the modernisation assessment demonstration.
 
 ### Core Guides
 
@@ -57,7 +57,7 @@ Comprehensive technical documentation for setting up and running the modernizati
 
 ## Quick Start
 
-Get up and running with the complete modernization demonstration in under 10 minutes.
+Get up and running with the complete modernisation demonstration in under 10 minutes.
 
 ### Prerequisites
 
@@ -86,7 +86,7 @@ make port-forward
 1. **Open Konveyor UI:** Navigate to <http://localhost:8080>
 2. **Import Application:** Upload `assets/application-export.json` or create manually
 3. **Run Analysis:** Follow the [Analysis Workflow](docs/analysis-workflow.md)  
-4. **Review Results:** Examine the Issues tab and modernization recommendations
+4. **Review Results:** Examine the Issues tab and modernisation recommendations
 
 ### Cleanup
 
@@ -99,8 +99,8 @@ make teardown
 
 ```txt
 ├── Presentation Materials/
-│   ├── SLIDES_MODERNIZATION.md              # Authoritative presentation source  
-│   ├── App_Modernization_Business_Slides.pptx  # Final PowerPoint (396KB)
+│   ├── SLIDES_MODERNISATION.md              # Authoritative presentation source  
+│   ├── App_Modernisation_Business_Slides.pptx  # Final PowerPoint (396KB)
 │   ├── PRESENTATION_GUIDE.md                # Complete presentation guide
 │   ├── DEMO_SCRIPT.md                       # Step-by-step demo script
 │   ├── SPEAKER_NOTES.md                     # Speaker prep & Q&A
@@ -137,16 +137,16 @@ This demonstration repository is designed for multiple audiences and scenarios:
 ### For Presenters
 
 - **Technical Meetups:** Cloud-native and Kubernetes community presentations
-- **Executive Briefings:** Business-focused modernization discussions
+- **Executive Briefings:** Business-focused modernisation discussions
 - **Customer Demonstrations:** Sales and consulting engagements
 - **Training Sessions:** Internal team education and workshops
 
-### For Organizations
+### For Organisations
 
-- **Assessment Strategy:** Understanding modernization readiness evaluation
+- **Assessment Strategy:** Understanding modernisation readiness evaluation
 - **Tool Evaluation:** Exploring Konveyor capabilities and benefits
-- **Business Case Development:** Building ROI arguments for modernization initiatives
-- **Best Practices Learning:** Understanding successful modernization patterns
+- **Business Case Development:** Building ROI arguments for modernisation initiatives
+- **Best Practices Learning:** Understanding successful modernisation patterns
 
 ## Key Features
 
@@ -154,7 +154,7 @@ This demonstration repository is designed for multiple audiences and scenarios:
 - **ROI-focused presentation** with real metrics (70% cost reduction, 99.8% faster deployment)
 - **Complete transformation story** from legacy monolith to cloud-native microservices
 - **Executive-friendly narrative** emphasizing business outcomes over technical details
-- **Success patterns and pitfalls** from real-world modernization projects
+- **Success patterns and pitfalls** from real-world modernisation projects
 
 ### Technical Capabilities
 - **AI-powered assessment** demonstrating automated application analysis
@@ -165,7 +165,7 @@ This demonstration repository is designed for multiple audiences and scenarios:
 ### Educational Content
 - **Step-by-step guides** for complete learning experience
 - **Troubleshooting documentation** for common issues and solutions
-- **Best practices documentation** for successful modernization projects
+- **Best practices documentation** for successful modernisation projects
 - **Community resources** and contribution guidelines
 
 ## Contributing
@@ -184,7 +184,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 ## Support and Community
 
 - **Issues:** Report bugs and request features via [GitHub Issues](https://github.com/my-janala/app-modernisation-demo/issues)
-- **Discussions:** Join community discussions about application modernization
+- **Discussions:** Join community discussions about application modernisation
 - **Konveyor Community:** Connect with the broader [Konveyor community](https://konveyor.io/community/)
 
 ## References and Resources
@@ -195,8 +195,8 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - **[Konveyor GitHub Organization](https://github.com/konveyor)** - Source code and community projects
 
 ### Documentation and Guides  
-- **[Konveyor Modernization Report](https://konveyor.io/modernization-report/)** - Industry insights and trends
-- **[Konveyor Methodology](https://github.com/konveyor/methodology)** - Modernization best practices
+- **[Konveyor Modernisation Report](https://konveyor.io/modernisation-report/)** - Industry insights and trends
+- **[Konveyor Methodology](https://github.com/konveyor/methodology)** - Modernisation best practices
 - **[Kube by Example Tutorial](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application)** - Hands-on learning path
 
 ### Cloud Native Ecosystem
