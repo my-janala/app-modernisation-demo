@@ -6,10 +6,10 @@
 # files are tracked in git, while development/temporary files are ignored.
 
 # === FINAL PRESENTATION FILES (TRACKED IN REPO) ===
-# ✅ SLIDES_MODERNIZATION.md - authoritative presentation source
-# ✅ App_Modernization_Business_Slides.pptx - final PowerPoint
-# ✅ assets/logos/ - official Konveyor branding
-# ✅ PRESENTATION_GUIDE.md, DEMO_SCRIPT.md, SPEAKER_NOTES.md
+# TRACKED: SLIDES_MODERNIZATION.md - authoritative presentation source
+# TRACKED: App_Modernization_Business_Slides.pptx - final PowerPoint
+# TRACKED: assets/logos/ - official Konveyor branding
+# TRACKED: PRESENTATION_GUIDE.md, DEMO_SCRIPT.md, SPEAKER_NOTES.md
 
 # === DEVELOPMENT & TEMPORARY FILES ===
 # Temporary files

@@ -2,7 +2,7 @@
 
 Complete application modernization demonstration showcasing business transformation from legacy systems to cloud-native architecture using Konveyor / Migration Toolkit for Applications (MTA). This repository includes presentation materials, technical guides, and automation for demonstrating AI-powered modernization assessment.
 
-## 🚀 Presentation Materials
+## Presentation Materials
 
 - **[SLIDES_MODERNIZATION.md](SLIDES_MODERNIZATION.md)** – Business-focused presentation on application modernization journey (27 slides)
 - **[App_Modernization_Business_Slides.pptx](App_Modernization_Business_Slides.pptx)** – Ready-to-present PowerPoint version (396KB)
@@ -10,7 +10,7 @@ Complete application modernization demonstration showcasing business transformat
 - **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** – Step-by-step demo script for Konveyor demonstration
 - **[SPEAKER_NOTES.md](SPEAKER_NOTES.md)** – Detailed speaker notes and Q&A preparation
 
-## 📚 Technical Guides
+## Technical Guides
 
 - [Setup Guide](docs/setup.md) – provision Minikube, install Konveyor, and troubleshoot common issues
 - [Analysis Workflow](docs/analysis-workflow.md) – import/run the sample application analysis and interpret findings  
@@ -32,28 +32,26 @@ make teardown
 
 After setup, open the Analysis Workflow to upload `assets/application-export.json` or create the application manually, then run an analysis and review the Issues tab.
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```txt
-📁 Presentation Materials
-├── SLIDES_MODERNIZATION.md              # Business-focused presentation source
-├── App_Modernization_Business_Slides.pptx  # Final PowerPoint presentation  
+```txt
+Presentation Materials/
+├── SLIDES_MODERNIZATION.md              # Authoritative presentation source  
+├── App_Modernization_Business_Slides.pptx  # Final PowerPoint (396KB)
 ├── PRESENTATION_GUIDE.md                # Complete presentation guide
-├── DEMO_SCRIPT.md                       # Step-by-step Konveyor demo
-├── SPEAKER_NOTES.md                     # Speaker notes & Q&A prep
-├── TROUBLESHOOTING_GUIDE.md            # Technical troubleshooting
-└── convert_to_powerpoint.sh             # Automated PowerPoint generation
+├── DEMO_SCRIPT.md                       # Step-by-step demo script
+└── SPEAKER_NOTES.md                     # Speaker prep & Q&A
 
-📁 Technical Assets  
-├── docs/                               # Setup, analysis, and modernization guides
-├── assets/                            # Sample Konveyor exports & Kubernetes templates
-├── assets/logos/                      # Official Konveyor branding assets
-├── images/                           # Supporting diagrams and visuals
-└── Makefile                          # Automated local Konveyor environment
+Technical Assets/  
+├── docs/ (setup, analysis, modernization)
+├── assets/ (Konveyor exports, logos, K8s templates)  
+└── Makefile (automated environment)
 
-📁 Community
+Community/
 ├── CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
-└── .github/                          # Issue and PR templates
+└── .github/ (issue and PR templates)
+```
 ```
 
 ## References

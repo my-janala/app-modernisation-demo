@@ -54,13 +54,13 @@ When converting to PowerPoint with Pandoc:
 
 ## Brand Consistency
 
-✅ **Do:**
+**RECOMMENDED:**
 - Use official logos from Konveyor GitHub
 - Maintain aspect ratios
 - Include CNCF badge when appropriate
 - Keep logos readable at presentation size
 
-❌ **Don't:**
+**AVOID:**
 - Modify logo colors or design
 - Stretch or distort logos
 - Use low-resolution versions

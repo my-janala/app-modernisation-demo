@@ -44,15 +44,15 @@ graph TB
 ## Slide 3: Legacy Application Landscape
 
 ```ascii
-🏢 Typical Enterprise (Fortune 500)
+TYPICAL ENTERPRISE (Fortune 500)
 
-📊 Application Portfolio:
+APPLICATION PORTFOLIO:
 ├── 2,000+ Applications
 ├── 70% Built 10+ Years Ago
 ├── Multiple Technologies
 └── Critical Business Logic
 
-⚠️  Current Challenges:
+CURRENT CHALLENGES:
 ├── $2M Annual Maintenance
 ├── 6-Month Release Cycles
 ├── Security Vulnerabilities
@@ -70,16 +70,16 @@ graph TB
 ```mermaid
 mindmap
   root((Business Value))
-    (💰 Cost Reduction)
+    (Cost Reduction)
       60% Lower Infrastructure
       40% Faster Development
-    (🚀 Speed to Market)
+    (Speed to Market)
       Weekly vs Monthly Releases
       Continuous Deployment
-    (📈 Scalability)
+    (Scalability)
       Auto-scaling
       Global Distribution
-    (🔒 Security)
+    (Security)
       Modern Security Practices
       Compliance Ready
 ```
@@ -113,12 +113,13 @@ graph LR
 ### Traditional Approach: Manual Analysis
 
 ```ascii
-👥 Team of 5 Architects
-⏱️  6 weeks per application
-📋 200+ page documents
-💰 $50,000+ per assessment
+MANUAL ASSESSMENT APPROACH:
+- Team of 5 Architects
+- 6 weeks per application
+- 200+ page documents
+- $50,000+ per assessment
 
-❌ Problems:
+PROBLEMS:
 ├── Inconsistent Results
 ├── Human Error Prone
 ├── Doesn't Scale
@@ -157,13 +158,13 @@ graph LR
 
 #### Before Modernization
 ```ascii
-🏢 Monolithic Architecture
+MONOLITHIC ARCHITECTURE:
 ├── Single Java WAR (50GB)
 ├── Oracle Database
 ├── Physical Servers
 └── 6-month Release Cycle
 
-📊 Business Impact:
+BUSINESS IMPACT:
 ├── $500K/month Infrastructure
 ├── 2-day Deployment Process
 ├── Cannot Handle Black Friday
@@ -181,10 +182,10 @@ graph TD
     A[E-commerce App] --> B[Konveyor Analysis]
     B --> C[Assessment Report]
     
-    C --> D[✅ Suitable for Containers]
-    C --> E[⚠️ Database Dependencies]
-    C --> F[🔄 3rd Party Integrations]
-    C --> G[📊 Migration Complexity: Medium]
+    C --> D[PASS: Suitable for Containers]
+    C --> E[WARN: Database Dependencies]
+    C --> F[INFO: 3rd Party Integrations]
+    C --> G[RESULT: Migration Complexity - Medium]
 ```
 
 **Result: Clear path forward in 2 hours vs 6 weeks**
@@ -199,14 +200,14 @@ graph TD
 ┌─────────────────────────────────────┐
 │           Physical Server           │
 ├─────────────────────────────────────┤
-│  🏢 E-commerce App (50GB WAR)       │
+│  [APP] E-commerce App (50GB WAR)     │
 │  ├── User Management               │
 │  ├── Product Catalog              │
 │  ├── Shopping Cart                │
 │  ├── Payment Processing           │
 │  └── Order Management             │
 │                                   │
-│  🗄️  Oracle Database (On-premise)  │
+│  [DB] Oracle Database (On-premise)   │
 └─────────────────────────────────────┘
 ```
 
@@ -220,14 +221,14 @@ graph TD
 ┌─────────────────────────────────────────────┐
 │              Kubernetes Cluster             │
 ├─────────────────────────────────────────────┤
-│  🐳 Users    🐳 Products   🐳 Cart         │
-│  Service     Service       Service          │
+│  [SVC] Users  [SVC] Products [SVC] Cart     │
+│  Service      Service       Service         │
 │                                             │
-│  🐳 Payment  🐳 Orders     🐳 Gateway       │
-│  Service     Service       Service          │
+│  [SVC] Payment [SVC] Orders [SVC] Gateway  │
+│  Service       Service      Service         │
 │                                             │
-│  ☁️ Managed Database  📊 Monitoring        │
-│                       🔒 Security          │
+│  [DB] Managed Database [MON] Monitoring    │
+│                        [SEC] Security      │
 └─────────────────────────────────────────────┘
 ```
 
@@ -263,11 +264,11 @@ gantt
 
 | Metric | Before | After | Improvement |
 |--------|---------|--------|-------------|
-| 🚀 **Deployment** | 2 days | 5 minutes | **99.8%** faster |
-| 💰 **Infrastructure** | $500K/month | $150K/month | **70%** reduction |
-| ⚡ **Scalability** | Fixed capacity | Auto-scale | **10x** peak handling |
-| 🔧 **Releases** | 2 per year | 50+ per year | **25x** frequency |
-| ⚠️ **Downtime** | 5 incidents/year | 0.1 incidents/year | **98%** reliability |
+| **Deployment** | 2 days | 5 minutes | **99.8%** faster |
+| **Infrastructure** | $500K/month | $150K/month | **70%** reduction |
+| **Scalability** | Fixed capacity | Auto-scale | **10x** peak handling |
+| **Releases** | 2 per year | 50+ per year | **25x** frequency |
+| **Downtime** | 5 incidents/year | 0.1 incidents/year | **98%** reliability |
 
 ---
 
@@ -293,17 +294,17 @@ graph LR
 
 ## Slide 15: Demo Results Overview
 
-### Assessment Complete ✅
+### Assessment Complete
 
 ```ascii
-📊 Modernization Readiness Score: 85/100
+MODERNIZATION READINESS SCORE: 85/100
 
-🎯 Recommended Path: Containerization → Kubernetes
-⏱️  Estimated Timeline: 3-4 weeks  
-💰 Expected ROI: 300% in 12 months
-🚀 Migration Confidence: High
+RECOMMENDED PATH: Containerization → Kubernetes
+ESTIMATED TIMELINE: 3-4 weeks  
+EXPECTED ROI: 300% in 12 months
+MIGRATION CONFIDENCE: High
 
-✅ Ready for Cloud Native Transformation
+RESULT: Ready for Cloud Native Transformation
 ```
 
 **From assessment to deployment plan in minutes**
@@ -358,9 +359,9 @@ graph LR
 
 ```mermaid
 graph TD
-    A[📊 Assess Portfolio] --> B[🎯 Prioritize Applications]
-    B --> C[🚀 Start with Quick Wins]
-    C --> D[📈 Scale Success Patterns]
+    A[Assess Portfolio] --> B[Prioritize Applications]
+    B --> C[Start with Quick Wins]
+    C --> D[Scale Success Patterns]
     
     A --> A1[Use AI Assessment Tools]
     B --> B1[Focus on Business Value]
@@ -375,19 +376,19 @@ graph TD
 ### What Makes Modernization Successful?
 
 ```ascii
-🎯 Executive Sponsorship
+EXECUTIVE SPONSORSHIP
    └── Clear business objectives
 
-👥 Cross-functional Teams  
+CROSS-FUNCTIONAL TEAMS  
    └── DevOps culture adoption
 
-🔧 Right Tools & Platforms
+RIGHT TOOLS & PLATFORMS
    └── AI-powered assessment
 
-📊 Measure Everything
+MEASURE EVERYTHING
    └── ROI tracking & optimization
 
-🎓 Skills Development
+SKILLS DEVELOPMENT
    └── Cloud-native expertise
 ```
 
@@ -397,19 +398,19 @@ graph TD
 
 ### Modernization Anti-Patterns
 
-❌ **Big Bang Approach**  
+**AVOID: Big Bang Approach**  
    *Solution: Incremental migration*
 
-❌ **Lift & Shift Everything**  
+**AVOID: Lift & Shift Everything**  
    *Solution: Assess first, then choose path*
 
-❌ **Ignoring Data Strategy**  
+**AVOID: Ignoring Data Strategy**  
    *Solution: Database modernization plan*
 
-❌ **Skipping Observability**  
+**AVOID: Skipping Observability**  
    *Solution: Monitoring from day one*
 
-❌ **Forgetting Security**  
+**AVOID: Forgetting Security**  
    *Solution: Security by design*
 
 ---
@@ -445,15 +446,15 @@ graph TB
 4. **Start Small & Learn** - Quick wins build momentum
 
 #### Tools to Help:
-- 🔧 **Konveyor** for AI-powered assessment
-- 📊 **Business case templates**
-- 👥 **Community best practices**
+- **Konveyor** for AI-powered assessment
+- **Business case templates**
+- **Community best practices**
 
 ---
 
 ## Slide 23: Q&A & Discussion
 
-# 💬 Let's Discuss Your Modernization Challenges
+# Q&A - Your Modernization Challenges
 
 ### Common Questions:
 - How to build the business case?
@@ -469,17 +470,18 @@ graph TB
 
 ![Konveyor Logo](assets/logos/konveyor_header.png)
 
-# 🚀 Start Your Modernization Journey Today
+# Start Your Modernization Journey Today
 
 ### Connect & Learn More
 
-📧 **Mezba Rahman** - mezba.rahman@capgemini.com  
-🏢 **Platform Engineering, CIS Capgemini**
+**Mezba Rahman** - mezba.rahman@capgemini.com  
+**Platform Engineering, CIS Capgemini**
 
 ### Resources
-🌐 **Konveyor Project**: https://konveyor.io  
-📖 **Modernization Guides**: https://konveyor.io/docs  
-💻 **This Demo**: github.com/my-janala/app-modernisation-demo
+
+**Konveyor Project**: https://konveyor.io  
+**Modernization Guides**: https://konveyor.io/docs  
+**This Demo**: github.com/my-janala/app-modernisation-demo
 
 ![CNCF Sandbox](assets/logos/cncf_icon.png) **CNCF Sandbox Project**
 
@@ -509,13 +511,13 @@ graph TB
 
 ### Pre-Migration Assessment
 
-✅ **Application Inventory Complete**  
-✅ **Dependencies Mapped**  
-✅ **Business Value Prioritized**  
-✅ **Team Skills Assessed**  
-✅ **Target Architecture Defined**  
-✅ **Success Metrics Established**  
-✅ **Risk Mitigation Planned**  
+COMPLETE: **Application Inventory Complete**  
+COMPLETE: **Dependencies Mapped**  
+COMPLETE: **Business Value Prioritized**  
+COMPLETE: **Team Skills Assessed**  
+COMPLETE: **Target Architecture Defined**  
+COMPLETE: **Success Metrics Established**  
+COMPLETE: **Risk Mitigation Planned**  
 
 ---
 
