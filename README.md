@@ -1,4 +1,73 @@
 # Application Modernisation Demo
+  
+## Frequently Asked Questions (FAQ)
+
+**Q: How do I set up the demo environment?**
+A: See the [Quick Start](#quick-start) section above, or run `./setup_demo.sh` for automated setup.
+
+**Q: Where can I find detailed setup instructions?**
+A: Refer to the [Setup Guide](docs/setup.md).
+
+**Q: How do I run the Konveyor analysis?**
+A: Follow the [Analysis Workflow](docs/analysis-workflow.md) for step-by-step instructions.
+
+**Q: What if I encounter issues with Minikube, Docker, or Konveyor?**
+A: Check the [Troubleshooting Guide](TROUBLESHOOTING_GUIDE.md) for common problems and solutions.
+
+**Q: How can I contribute or report bugs?**
+A: See the [Community & Contribution](#community--contribution) section and use the GitHub issue templates.
+
+**Q: Where is the code of conduct?**
+A: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+  
+## Community & Contribution
+
+We welcome contributions and feedback from the community!
+
+### How to Contribute
+- Fork the repository and create your branch from `develop`.
+- Submit pull requests with clear descriptions and reference related issues.
+- Review our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and best practices.
+- For bug reports or feature requests, use the GitHub issue templates provided.
+
+### Code of Conduct
+- Please read and follow our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) to ensure a welcoming and respectful environment for all contributors.
+
+We value collaboration and strive to make this project useful for everyone interested in application modernisation.
+
+## Quick Start
+
+Get up and running with the modernisation demo in minutes.
+
+### Prerequisites
+- Docker Desktop (4GB+ RAM recommended)
+- Minikube (local Kubernetes cluster)
+- kubectl (Kubernetes CLI)
+- Java 17 or later
+
+### Install Essentials (macOS example)
+```bash
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64
+sudo install minikube-darwin-arm64 /usr/local/bin/minikube
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
+```
+
+### Provision Everything (Makefile)
+```bash
+make setup
+```
+This will start Minikube, install required addons, and deploy Konveyor automatically.
+
+### Run the Demo
+Follow the [Analysis Workflow](docs/analysis-workflow.md) to assess a sample legacy application and view results in the Konveyor UI.
+
+### More Details
+- [Setup Guide](docs/setup.md): Full environment setup and configuration
+- [Analysis Workflow](docs/analysis-workflow.md): Step-by-step demo instructions
+
+### Troubleshooting
+- See [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) for common issues and solutions (Minikube, Docker, Konveyor, etc.)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Konveyor](https://img.shields.io/badge/Powered%20by-Konveyor-orange.svg)](https://konveyor.io/)
