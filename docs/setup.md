@@ -65,44 +65,38 @@ make CPUS=6 MEMORY=12288 setup
 
 The commands assume `kubectl` communicates with the created Minikube profile (context `konveyor-demo` by default).
 
-## Manual Setup Steps
 
-### Start Minikube
+## Manual Setup Steps (No OLM)
+
+### 1. Start Minikube
 
 ```bash
-minikube start --cpus=4 --memory=8192 --disk-size=40g -p konveyor-demo
-minikube addons enable ingress
-minikube addons enable olm
+minikube start --kubernetes-version=v1.30.4 --cpus=4 --memory=8192 --disk-size=40g -p konveyor-demo
+minikube addons enable ingress -p konveyor-demo
 ```
 
-If the OLM addon is unavailable—or you prefer to use the pinned manifests—disable it and apply the same release used by the automated flow:
-
+### 2. Install OLM Manually (if needed)
+If the OLM addon fails (ImagePullBackOff on catalog pod), disable it and install pinned manifests:
 ```bash
-minikube addons disable olm
+minikube addons disable olm -p konveyor-demo
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.25.0/crds.yaml
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.25.0/olm.yaml
 ```
 
-### Install Konveyor Operator
-
+### 3. Install Konveyor Operator
 ```bash
 kubectl create -f https://operatorhub.io/install/konveyor-operator.yaml
 ```
 
-### Verify Operator Installation
-
+### 4. Wait for CRDs and Operator Pod
+Check for CRDs and operator pod:
 ```bash
-# Check that the operator pod is running
+kubectl get crd | grep tackle
 kubectl get pods -n my-konveyor-operator
-
-# Check that the Tackle CRD is installed
-kubectl get crds | grep tackle
 ```
+You should see `tackles.tackle.konveyor.io` and a pod like `tackle-operator-xxxx` running.
 
-You should see a pod like `tackle-operator-xxxx` in the `Running` state and a CRD named `tackles.tackle.konveyor.io`.
-
-### Deploy Tackle Custom Resource
-
+### 5. Create Tackle Instance
 ```bash
 cat <<'YAML' | kubectl apply -f -
 apiVersion: tackle.konveyor.io/v1alpha1
@@ -115,32 +109,36 @@ spec:
 YAML
 ```
 
-### Verify Tackle Deployment
-
+### 6. Verify Deployment
+Check for pods and services:
 ```bash
-# Check that the Tackle custom resource exists
-kubectl get tackle -n my-konveyor-operator
-
-# Check that all pods are running
 kubectl get pods -n my-konveyor-operator
-
-# Check that the required services are available
 kubectl get svc -n my-konveyor-operator
 ```
-
 Expect to see:
+- Pods: `tackle-operator`, `tackle-ui`, `tackle-hub` (all Running)
+- Services: `tackle-ui`, `tackle-hub` exposed
 
-- A `tackle` resource listed.
-- Pods such as `tackle-operator`, `tackle-ui`, and `tackle-hub` in the `Running` state.
-- Services `tackle-ui` and `tackle-hub` exposed.
-
-### Access the Konveyor UI
-
+### 7. Access the Konveyor UI
 ```bash
-kubectl port-forward svc/tackle-ui 8080:8080 -n my-konveyor-operator
+kubectl port-forward svc/tackle-ui -n my-konveyor-operator 8080:8080
 ```
-
 Open your browser at [http://localhost:8080](http://localhost:8080).
+
+---
+### Troubleshooting & Fallbacks
+- If OLM pods fail (ImagePullBackOff), always use the pinned manifests above.
+- If operator pod is stuck, check logs:
+  ```bash
+  kubectl logs deploy/tackle-operator -n my-konveyor-operator --tail=100
+  ```
+- If `tackle-ui` service is missing, wait a few minutes and recheck pods/services.
+- For persistent issues, delete the Minikube profile and start over:
+  ```bash
+  minikube delete -p konveyor-demo
+  ```
+
+---
 
 ## Important Notes
 
