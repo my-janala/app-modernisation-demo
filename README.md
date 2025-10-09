@@ -1,3 +1,6 @@
+---
+
+> **Note:** The repository includes `tackle-crds` manifests for future usage and advanced customisation. These are not referenced in the current setup but are available for manual or advanced deployments as needed.
 
 
 # Application Modernisation Demo
@@ -58,25 +61,6 @@ See [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) for common issues and s
 
 
 
-## Frequently Asked Questions (FAQ)
-
-**Q: How do I set up the demo environment?**
-
-A: See the [Quick Start](#quick-start) section above, or run `./setup_demo.sh` for automated setup.
-
-**Q: Where can I find detailed setup instructions?**
-
-A: Refer to the [Setup Guide](docs/setup.md).
-
-**Q: How do I run the Konveyor analysis?**
-
-A: Follow the [Analysis Workflow](docs/analysis-workflow.md) for step-by-step instructions.
-
-**Q: What if I encounter issues with Minikube, Docker, or Konveyor?**
-
-A: Check the [Troubleshooting Guide](TROUBLESHOOTING_GUIDE.md) for common problems and solutions.
-
-**Q: How can I contribute or report bugs?**
 
 A: See the [CONTRIBUTING.md](CONTRIBUTING.md) and use the GitHub issue templates.
 
@@ -113,7 +97,7 @@ A: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 ## Contributing
 
 We welcome contributions to improve this demonstration repository. Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
----
+
 
 - Submitting presentation improvements
 - Adding technical documentation  
