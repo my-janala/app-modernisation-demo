@@ -1,8 +1,5 @@
 ---
 
-> **Note:** The repository includes `tackle-crds` manifests for future usage and advanced customisation. These are not referenced in the current setup but are available for manual or advanced deployments as needed.
-
-
 # Application Modernisation Demo
 
 ---
