@@ -1,3 +1,15 @@
+# Konveyor Administration Setup Checklist
+
+Before starting application analysis, ensure the following administration tasks are completed in Konveyor:
+
+- **User Roles & Permissions:** Confirm you have the necessary access to import, analyze, and manage applications.
+- **Integrations:** Set up any required integrations (source code repositories, authentication, external tools).
+- **Business Rules & Tags:** Configure custom rules, tags, or categories for organizing your analysis.
+- **Analysis Settings:** Review and adjust default rulesets, migration targets, or inventory sources as needed.
+- **System Health:** Check for pending upgrades, errors, or misconfigurations in the environment.
+
+Completing these steps ensures a smooth and accurate analysis workflow.
+
 # Analysis Workflow
 
 Walk through a full analysis of the legacy Tomcat application using Konveyor / Migration Toolkit for Applications (MTA).

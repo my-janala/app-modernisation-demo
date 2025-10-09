@@ -1,5 +1,132 @@
+
 # Application Modernisation Demo
-  
+
+---
+
+## Introduction
+
+This repository demonstrates enterprise application modernisation using Konveyor. It provides a hands-on journey from legacy monoliths to cloud-native microservices, with guides, assets, and automation for technical and business audiences.
+
+> **Note:** The Quick Start installation process currently has an issue—Konveyor must be deployed manually for now. A fix is in progress.
+
+---
+
+## Overview
+
+Transform your understanding of application modernisation through a complete business transformation story. This repository provides everything needed to demonstrate how AI-powered assessment tools accelerate the journey from legacy systems to modern, scalable, cloud-native architectures.
+
+**Key Benefits:**
+
+- **Business-focused narrative** emphasizing ROI and transformation outcomes
+- **Complete presentation package** for technical and executive audiences
+- **Hands-on demonstration** with real Konveyor assessment workflow
+- **Automated environment setup** for consistent demos
+
+---
+
+## Quick Start
+
+Get up and running with the complete modernisation demonstration in under 10 minutes.
+
+> ⚠️ **Known Issue:** The automated Quick Start (`make setup`) may fail due to an OLM/Konveyor deployment bug. Please follow the manual setup steps in [Setup Guide](docs/setup.md) until this is resolved. Konveyor has been deployed manually for this demo.
+
+### Prerequisites
+
+- **Docker Desktop** (4GB+ RAM recommended)
+- **Minikube** or local Kubernetes cluster
+- **kubectl** configured and accessible
+- **Make** utility (standard on macOS/Linux)
+- **Pandoc** (optional, for presentation generation)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/my-janala/app-modernisation-demo.git
+cd app-modernisation-demo
+
+# Provision Minikube + Konveyor (15-20 minutes first time)
+make setup
+
+# Confirm the environment is healthy
+make verify
+
+# Forward Konveyor UI to http://localhost:8080 (backgrounds tunnel, logs to /tmp/konveyor-port-forward.log)
+make port-forward
+```
+
+If the Minikube OLM addon is unhealthy on your workstation, rerun the setup with pinned manifests:
+
+```bash
+make INSTALL_OLM_MANUALLY=true setup
+```
+
+### Demo Execution
+
+1. **Verify components (optional repeat):**
+    Check that all pods are running and healthy.
+   
+    ```bash
+    make verify
+    # or
+    kubectl --context konveyor-demo get pods -n my-konveyor-operator
+    ```
+
+2. **Open Konveyor UI:**
+    Start the port-forward and access the UI in your browser.
+   
+    ```bash
+    make port-forward
+    # then open http://localhost:8080
+    # check logs: tail -f /tmp/konveyor-port-forward.log
+    # to stop: pkill -f 'port-forward svc/tackle-ui' or make teardown
+    ```
+
+3. **Import Application:**
+    In the Konveyor UI, upload the sample application export or create a new application manually.
+   
+    *(No command; use the UI to upload `assets/application-export.json`)*
+
+4. **Run Analysis:**
+    Start the analysis and monitor progress.
+   
+    ```bash
+    # Use the UI to start analysis
+    # Optionally, watch logs:
+    kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+    ```
+
+5. **Review Results:**
+    Examine the Issues tab and modernisation recommendations in the Konveyor UI.
+   
+    *(No command; review results in the UI)*
+
+### Cleanup
+
+```bash
+# Tear everything down when finished
+make teardown
+```
+
+---
+
+## Troubleshooting
+
+See [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) for common issues and solutions (Minikube, Docker, Konveyor, etc.)
+
+---
+
+
+## Presentation Materials
+
+| File | Description | Format |
+|------|-------------|---------|
+| **[SLIDES_MODERNISATION.md](SLIDES_MODERNISATION.md)** | Business-focused modernisation journey presentation (~15 slides) | Markdown |
+| **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** | Step-by-step Konveyor demonstration script | Markdown |
+| **[SPEAKER_NOTES.md](SPEAKER_NOTES.md)** | Detailed speaker notes and Q&A preparation | Markdown |
+
+---
+
 ## Frequently Asked Questions (FAQ)
 
 **Q: How do I set up the demo environment?**
@@ -19,61 +146,42 @@ A: See the [Community & Contribution](#community--contribution) section and use 
 
 **Q: Where is the code of conduct?**
 A: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-  
-## Community & Contribution
 
-We welcome contributions and feedback from the community!
+---
 
-### How to Contribute
-- Fork the repository and create your branch from `develop`.
-- Submit pull requests with clear descriptions and reference related issues.
-- Review our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and best practices.
-- For bug reports or feature requests, use the GitHub issue templates provided.
+## References and Resources
 
-### Code of Conduct
-- Please read and follow our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) to ensure a welcoming and respectful environment for all contributors.
+### Konveyor Project
+- **[Konveyor Official Website](https://konveyor.io/)** - Main project portal and documentation
+- **[Migration Toolkit for Applications](https://developers.redhat.com/products/mta/overview)** - Technical product overview
+- **[Konveyor GitHub Organization](https://github.com/konveyor)** - Source code and community projects
 
-We value collaboration and strive to make this project useful for everyone interested in application modernisation.
+### Documentation and Guides
+- **[Konveyor Modernisation Report](https://konveyor.io/modernisation-report/)** - Industry insights and trends
+- **[Konveyor Methodology](https://github.com/konveyor/methodology)** - Modernisation best practices
+- **[Kube by Example Tutorial](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application)** - Hands-on learning path
 
-## Quick Start
+### Cloud Native Ecosystem
+- **[CNCF Landscape](https://landscape.cncf.io/)** - Cloud-native project ecosystem
+- **[Kubernetes Documentation](https://kubernetes.io/docs/)** - Container orchestration platform
+- **[Cloud Native Computing Foundation](https://www.cncf.io/)** - Open source cloud-native ecosystem
 
-Get up and running with the modernisation demo in minutes.
+---
 
-### Prerequisites
-- Docker Desktop (4GB+ RAM recommended)
-- Minikube (local Kubernetes cluster)
-- kubectl (Kubernetes CLI)
-- Java 17 or later
+## About the Author
 
-### Install Essentials (macOS example)
-```bash
-curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64
-sudo install minikube-darwin-arm64 /usr/local/bin/minikube
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
-sudo install -o root -g wheel -m 0755 kubectl /usr/local/bin/kubectl
-```
+**Mezbaur Rahman** is a Platform Engineer at CIS Capgemini, specialising in cloud-native technologies, application modernisation, and enterprise transformation initiatives. With extensive experience in containerisation, Kubernetes, and modern DevOps practices, Mezba helps organisations navigate their journey from legacy systems to scalable, cloud-native architectures.
 
-### Provision Everything (Makefile)
-```bash
-make setup
-```
-This will start Minikube, install required addons, and deploy Konveyor automatically.
+**Connect with Mezba:**
+- 🔗 **LinkedIn:** [linkedin.com/in/mezba](https://www.linkedin.com/in/mezba/)
+- 📝 **Technical Blog:** [medium.com/@mezba](https://medium.com/@mezba)
+- 💼 **Professional Focus:** Platform Engineering, Application Modernisation, Cloud-Native Architecture
 
-### Run the Demo
-Follow the [Analysis Workflow](docs/analysis-workflow.md) to assess a sample legacy application and view results in the Konveyor UI.
-
-### More Details
-- [Setup Guide](docs/setup.md): Full environment setup and configuration
-- [Analysis Workflow](docs/analysis-workflow.md): Step-by-step demo instructions
-
-### Troubleshooting
-- See [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) for common issues and solutions (Minikube, Docker, Konveyor, etc.)
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Konveyor](https://img.shields.io/badge/Powered%20by-Konveyor-orange.svg)](https://konveyor.io/)
-[![CNCF Sandbox](https://img.shields.io/badge/CNCF-Sandbox-purple.svg)](https://www.cncf.io/projects/)
-
-A comprehensive demonstration repository showcasing enterprise application modernisation from legacy monoliths to cloud-native microservices. This project demonstrates the complete modernisation journey using **Konveyor** (Migration Toolkit for Applications) with ready-to-use presentation materials, technical guides, and automated infrastructure setup.
+**Expertise Areas:**
+- Enterprise application modernisation strategies
+- Kubernetes and container orchestration
+- Platform engineering and DevOps transformation
+- Cloud-native architecture design and implementation
 
 ## Overview
 
@@ -108,8 +216,6 @@ Ready-to-use presentation assets for technical meetups, executive briefings, and
 | File | Description | Format |
 |------|-------------|---------|
 | **[SLIDES_MODERNISATION.md](SLIDES_MODERNISATION.md)** | Business-focused modernisation journey presentation (~15 slides) | Markdown |
-| **[App_Modernisation_Business_Slides.pptx](App_Modernisation_Business_Slides.pptx)** | PowerPoint version of the modernisation journey (for executive/technical audiences) | PPTX |
-| **[PRESENTATION_GUIDE.md](PRESENTATION_GUIDE.md)** | Complete presentation guide with timing and setup | Markdown |
 | **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** | Step-by-step Konveyor demonstration script | Markdown |
 | **[SPEAKER_NOTES.md](SPEAKER_NOTES.md)** | Detailed speaker notes and Q&A preparation | Markdown |
 
@@ -176,11 +282,38 @@ make INSTALL_OLM_MANUALLY=true setup
 
 ### Demo Execution
 
-1. **Verify components (optional repeat):** `make verify` or `kubectl --context konveyor-demo get pods -n my-konveyor-operator`
-2. **Open Konveyor UI:** After the background `make port-forward`, browse to <http://localhost:8080>. Check `/tmp/konveyor-port-forward.log` for tunnel logs; stop it later with `pkill -f 'port-forward svc/tackle-ui'` or `make teardown`.
-3. **Import Application:** Upload `assets/application-export.json` or create manually
-4. **Run Analysis:** Follow the [Analysis Workflow](docs/analysis-workflow.md) and optionally watch progress with `kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f`  
-5. **Review Results:** Examine the Issues tab and modernisation recommendations
+1. **Verify components (optional repeat):**
+   
+    ```bash
+    make verify
+    # or
+    kubectl --context konveyor-demo get pods -n my-konveyor-operator
+    ```
+
+2. **Open Konveyor UI:**
+   
+    After the background `make port-forward`, browse to <http://localhost:8080>. Check `/tmp/konveyor-port-forward.log` for tunnel logs.
+    To stop the tunnel:
+    ```bash
+    pkill -f 'port-forward svc/tackle-ui'
+    # or
+    make teardown
+    ```
+
+3. **Import Application:**
+   
+    Upload `assets/application-export.json` in the Konveyor UI or create an application manually.
+
+4. **Run Analysis:**
+   
+    Follow the [Analysis Workflow](docs/analysis-workflow.md) and optionally watch progress:
+    ```bash
+    kubectl logs -l app=tackle-analyzer -n my-konveyor-operator -f
+    ```
+
+5. **Review Results:**
+   
+    Examine the Issues tab and modernisation recommendations in the Konveyor UI.
 
 ### Cleanup
 
@@ -191,11 +324,9 @@ make teardown
 
 ## Repository Structure
 
-```txt
+
 ├── Presentation Materials/
 │   ├── SLIDES_MODERNISATION.md              # Authoritative presentation source  
-│   ├── App_Modernisation_Business_Slides.pptx  # Final PowerPoint (396KB)
-│   ├── PRESENTATION_GUIDE.md                # Complete presentation guide
 │   ├── DEMO_SCRIPT.md                       # Step-by-step demo script
 │   ├── SPEAKER_NOTES.md                     # Speaker prep & Q&A
 │   ├── TROUBLESHOOTING_GUIDE.md            # Technical troubleshooting
@@ -213,7 +344,6 @@ make teardown
 │   │   ├── configmap.yaml                 # Kubernetes configuration
 │   │   ├── deployment.yaml                # Deployment templates
 │   │   └── secret.yaml                    # Secret templates
-│   ├── images/                            # Supporting diagrams
 │   └── Makefile                           # Automated environment setup
 │
 └── Community/
@@ -222,6 +352,28 @@ make teardown
     ├── SECURITY.md                        # Security policies
     ├── LICENSE                            # Apache 2.0 license
     └── .github/                           # Issue and PR templates
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+**Q: How do I set up the demo environment?**
+A: See the [Quick Start](#quick-start) section above, or run `./setup_demo.sh` for automated setup.
+
+**Q: Where can I find detailed setup instructions?**
+A: Refer to the [Setup Guide](docs/setup.md).
+
+**Q: How do I run the Konveyor analysis?**
+A: Follow the [Analysis Workflow](docs/analysis-workflow.md) for step-by-step instructions.
+
+**Q: What if I encounter issues with Minikube, Docker, or Konveyor?**
+A: Check the [Troubleshooting Guide](TROUBLESHOOTING_GUIDE.md) for common problems and solutions.
+
+**Q: How can I contribute or report bugs?**
+A: See the [Community & Contribution](#community--contribution) section and use the GitHub issue templates.
+
+**Q: Where is the code of conduct?**
+A: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 ```
 
 ## Use Cases
