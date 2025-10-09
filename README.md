@@ -52,23 +52,12 @@ For detailed setup steps and commands, please refer to the [Setup Guide](docs/se
 
 ## Troubleshooting
 
-See [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) for common issues and solutions (Minikube, Docker, Konveyor, etc.)
-
----
-
-
-
-
-A: See the [CONTRIBUTING.md](CONTRIBUTING.md) and use the GitHub issue templates.
-
-**Q: Where is the code of conduct?**
-
-A: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+For common issues and solutions (Minikube, Docker, Konveyor, etc.), refer to the [Setup Guide](docs/setup.md).
 
 
 ---
 
-## References and Resources
+## Resources
 
 ### Konveyor Project
 
@@ -90,64 +79,39 @@ A: See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ---
 
+> **Note:** The repository includes `tackle-crds` manifests for future usage and advanced customisation. These are not referenced in the current setup but are available for manual or advanced deployments as needed.
+
+---
 
 ## Contributing
 
 We welcome contributions to improve this demonstration repository. Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
-
 
 - Submitting presentation improvements
 - Adding technical documentation  
 - Reporting issues and bugs
 - Proposing new features
 
+---
 
 ## License
 
-
-
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
+---
+
 ## Support and Community
-
-
 
 - **Issues:** Report bugs and request features via [GitHub Issues](https://github.com/my-janala/app-modernisation-demo/issues)
 - **Discussions:** Join community discussions about application modernisation
 - **Konveyor Community:** Connect with the broader [Konveyor community](https://konveyor.io/community/)
 
 
-## Further Reading and Resources
-
-
-
-### Konveyor Project Links
-
-- **[Konveyor Official Website](https://konveyor.io/)** - Main project portal and documentation
-- **[Migration Toolkit for Applications](https://developers.redhat.com/products/mta/overview)** - Technical product overview
-- **[Konveyor GitHub Organization](https://github.com/konveyor)** - Source code and community projects
-
-### Modernisation Documentation
-
-- **[Konveyor Modernisation Report](https://konveyor.io/modernisation-report/)** - Industry insights and trends
-- **[Konveyor Methodology](https://github.com/konveyor/methodology)** - Modernisation best practices
-- **[Kube by Example Tutorial](https://kubebyexample.com/learning-paths/migrating-kubernetes/install-konveyor-and-analyse-legacy-java-application)** - Hands-on learning path
-
-### Cloud Native Resources
-
-- **[CNCF Landscape](https://landscape.cncf.io/)** - Cloud-native project ecosystem
-- **[Kubernetes Documentation](https://kubernetes.io/docs/)** - Container orchestration platform
-- **[Cloud Native Computing Foundation](https://www.cncf.io/)** - Open source cloud-native ecosystem
-
+---
 
 ## About the Author
-
-
-
 
 Mezbaur Rahman — Platform Engineer at CIS Capgemini, specialising in cloud-native technologies and application modernisation.
 
 - [LinkedIn](https://www.linkedin.com/in/mezba/)
 - [Technical Blog](https://medium.com/@mezba)
-
----
