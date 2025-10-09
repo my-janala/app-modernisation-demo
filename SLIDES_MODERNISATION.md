@@ -5,9 +5,11 @@
 
 ---
 
+
 ## Slide 1: Title & Introduction
 
-![Konveyor Logo](assets/logos/konveyor_header.png)
+
+![Konveyor Header](https://konveyor.io/images/konveyor_header.png)
 
 # Application Modernisation
 ## From Monolith to Microservices
@@ -20,6 +22,8 @@ Platform Engineer | CIS Capgemini
 
 ---
 
+---
+---
 ## Slide 2: The Digital Transformation Challenge
 
 ```mermaid
@@ -40,6 +44,7 @@ graph TB
 
 ---
 
+---
 ---
 ## Slide 3: Legacy Application Landscape
 
@@ -63,6 +68,7 @@ CURRENT CHALLENGES:
 
 ---
 
+---
 ---
 ## Slide 4: Modernisation Business Drivers
 
@@ -88,6 +94,7 @@ mindmap
 ---
 
 ---
+---
 ## Slide 5: The Modernisation Spectrum
 
 ```mermaid
@@ -110,6 +117,7 @@ graph LR
 
 ---
 
+---
 ---
 ## Slide 6: The Assessment Problem
 
@@ -134,9 +142,14 @@ PROBLEMS:
 ---
 
 ---
+---
 ## Slide 7: AI-Powered Assessment (Konveyor)
 
-![Konveyor Avatar](assets/logos/konveyor_avatar.png)
+![Konveyor UI Dashboard](https://konveyor.io/images/konveyor-ui-dashboard.png)
+
+![Konveyor CLI](https://konveyor.io/images/konveyor-cli.png)
+
+![Konveyor AI](https://konveyor.io/images/kai.gif)
 
 ### Meet Your Modernisation Assistant
 
@@ -157,7 +170,38 @@ graph LR
 ---
 
 ---
-## Slide 8: Real-World Example (Case Study)
+---
+## Slide 8: Real-World Example (Case Study: Before/After)
+
+### Before Modernisation
+```ascii
+MONOLITHIC ARCHITECTURE:
+├── Single Java WAR (50GB)
+├── Oracle Database
+├── Physical Servers
+└── 6-month Release Cycle
+
+BUSINESS IMPACT:
+├── $500K/month Infrastructure
+├── 2-day Deployment Process
+├── Cannot Handle Black Friday
+└── 5 Critical Outages/Year
+```
+
+### After Modernisation
+```ascii
+CLOUD-NATIVE ARCHITECTURE:
+├── Kubernetes Cluster
+├── Microservices (User, Product, Cart, Payment, Orders)
+├── Managed Database
+├── Monitoring & Security
+
+BUSINESS IMPACT:
+├── $150K/month Infrastructure
+├── 5-minute Deployment
+├── Auto-scale for peak events
+└── 0.1 incidents/year
+```
 
 ### Case Study: E-commerce Platform
 
@@ -201,74 +245,9 @@ graph TD
 ---
 ## Slide 10: Architecture Evolution (Before/After)
 
-### Before: Monolithic Deployment
-
-```ascii
-┌─────────────────────────────────────┐
-│           Physical Server           │
-├─────────────────────────────────────┤
-│  [APP] E-commerce App (50GB WAR)     │
-│  ├── User Management               │
-│  ├── Product Catalog              │
-│  ├── Shopping Cart                │
-│  ├── Payment Processing           │
-│  └── Order Management             │
-│                                   │
-│  [DB] Oracle Database (On-premise)   │
-└─────────────────────────────────────┘
-```
 
 ---
-
----
-## Slide 11: Target Architecture (Cloud-Native)
-
-### After: Cloud-Native Microservices
-
-```ascii
-┌─────────────────────────────────────────────┐
-│              Kubernetes Cluster             │
-├─────────────────────────────────────────────┤
-│  [SVC] Users  [SVC] Products [SVC] Cart     │
-│  Service      Service       Service         │
-│                                             │
-│  [SVC] Payment [SVC] Orders [SVC] Gateway  │
-│  Service       Service      Service         │
-│                                             │
-│  [DB] Managed Database [MON] Monitoring    │
-│                        [SEC] Security      │
-└─────────────────────────────────────────────┘
-```
-
----
-
----
-## Slide 12: Migration Strategy & Timeline
-
-### Incremental Modernization Plan
-
-```mermaid
-gantt
-    title E-commerce Modernization Timeline
-    dateFormat  YYYY-MM-DD
-    section Phase 1
-    Assessment & Planning    :done, phase1, 2024-01-01, 2w
-    section Phase 2
-    Containerization        :done, phase2, after phase1, 4w
-    section Phase 3  
-    Service Extraction      :active, phase3, after phase2, 8w
-    section Phase 4
-    Cloud Migration         :phase4, after phase3, 6w
-    section Phase 5
-    Optimization           :phase5, after phase4, 4w
-```
-
-**Total: 6 months (vs 2 years traditional)**
-
----
-
----
-## Slide 13: Business Impact (Before vs After)
+## Slide 9: Business Impact (Before vs After)
 
 ### Transformation Results
 
@@ -282,50 +261,7 @@ gantt
 
 ---
 
----
-## Slide 14: Demo Preview & Results Overview
-
-### What We'll See Today
-
-```mermaid
-graph LR
-    A[Legacy App<br/>Upload] --> B[AI Analysis<br/>2 minutes]
-    B --> C[Modernization<br/>Plan]
-    C --> D[Business<br/>Value]
-```
-
-#### Demo Application
-- **Type**: Java Spring Boot Monolith
-- **Complexity**: Medium (typical enterprise app)
-- **Goal**: Kubernetes readiness assessment
-
-**Let's see AI-powered modernisation in action!**
-
----
-
----
-## Slide 15: Key Modernisation Patterns & Success Factors
-
-### Assessment Complete
-
-```ascii
-MODERNIZATION READINESS SCORE: 85/100
-
-RECOMMENDED PATH: Containerization → Kubernetes
-ESTIMATED TIMELINE: 3-4 weeks  
-EXPECTED ROI: 300% in 12 months
-MIGRATION CONFIDENCE: High
-
-RESULT: Ready for Cloud Native Transformation
-```
-
-**From assessment to deployment plan in minutes**
-
----
-
-
----
-## Slide 16: Q&A & Thank You / Contact
+## Slide 10: Q&A & Contact
 
 # Q&A - Your Modernisation Challenges
 
@@ -339,7 +275,9 @@ RESULT: Ready for Cloud Native Transformation
 
 ---
 
-![Konveyor Logo](assets/logos/konveyor_header.png)
+![Konveyor Logo](https://konveyor.io/images/Konveyor-logo-color-wh.svg)
+
+![CNCF Logo](https://konveyor.io/images/cncf-logo-white.svg)
 
 # Start Your Modernisation Journey Today
 
@@ -360,5 +298,3 @@ Platform Engineer | CIS Capgemini
 **Konveyor Project**: https://konveyor.io  
 **Modernisation Guides**: https://konveyor.io/docs  
 **This Demo**: github.com/my-janala/app-modernisation-demo
-
-![CNCF Sandbox](assets/logos/cncf_icon.png) **CNCF Sandbox Project**
